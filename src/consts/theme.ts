@@ -1,0 +1,61 @@
+export const colors = {
+  background: '#070C1A',
+  surface: '#0F1729',
+  surfaceElevated: '#121E36',
+  surfaceMuted: '#1A2440',
+  primary: '#FF6B1A',
+  primaryDark: '#FF4500',
+  primaryGlow: 'rgba(255, 107, 26, 0.42)',
+  heading: '#E8EEFF',
+  text: '#FFFFFF',
+  textMuted: '#3A4560',
+  textDim: '#8B95B0',
+  textSecondary: '#6B7A96',
+  border: '#1E2D4A',
+  borderLight: 'rgba(255, 255, 255, 0.1)',
+  borderFaint: 'rgba(255, 255, 255, 0.07)',
+  chipBg: 'rgba(255, 255, 255, 0.05)',
+  purple: '#9333EA',
+  purpleLight: '#C084FC',
+  purpleMuted: '#A78BFA',
+  guidePurpleBg: 'rgba(147, 51, 234, 0.14)',
+  guidePurpleBorder: 'rgba(147, 51, 234, 0.35)',
+  warningHeading: '#FF6B6B',
+  wildFactBorder: 'rgba(234, 179, 8, 0.45)',
+  wildFactBg: 'rgba(234, 179, 8, 0.08)',
+  green: '#22C55E',
+  blue: '#3B82F6',
+  yellow: '#EAB308',
+  success: '#22C55E',
+  successBg: 'rgba(34, 197, 94, 0.12)',
+  successBorder: 'rgba(34, 197, 94, 0.35)',
+  error: '#EF4444',
+  errorBg: 'rgba(239, 68, 68, 0.12)',
+  errorBorder: 'rgba(239, 68, 68, 0.35)',
+  dotInactive: 'rgba(255, 255, 255, 0.22)',
+  overlayStart: 'rgba(7, 12, 26, 0.25)',
+  overlayMid: 'rgba(7, 12, 26, 0.5)',
+  overlayEnd: 'rgba(7, 12, 26, 0.97)',
+  heroOverlayStart: 'rgba(7, 12, 26, 0.85)',
+  heroOverlayMid: 'rgba(7, 12, 26, 0.4)',
+  cardOverlayEnd: 'rgba(7, 12, 26, 0.75)',
+} as const;
+
+export const spacing = {
+  xs: 4,
+  sm: 8,
+  md: 16,
+  lg: 24,
+  xl: 28,
+  xxl: 32,
+} as const;
+
+export const introLayout = {
+  horizontal: 28,
+  buttonHeight: 58,
+  buttonRadius: 16,
+} as const;
+
+export const tabBarLayout = {
+  iconLabelGap: 6,
+} as const;
