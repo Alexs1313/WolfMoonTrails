@@ -14,7 +14,7 @@ type Props = StackScreenProps<
 export function OverviewScreen({navigation}: Props) {
   return (
     <ScreenContainer>
-      <Text style={styles.title}>Overview</Text>
+      <Text style={styles.heading}>Overview</Text>
       <Pressable
         style={styles.link}
         onPress={() =>
@@ -27,7 +27,7 @@ export function OverviewScreen({navigation}: Props) {
 }
 
 const styles = StyleSheet.create({
-  title: {
+  heading: {
     fontSize: 24,
     fontWeight: '600',
     color: colors.text,

@@ -52,7 +52,7 @@ export function IntroScreen({navigation}: Props) {
   }, [finishIntro, isLastStep]);
 
   return (
-    <View style={styles.root}>
+    <View style={styles.screenLayout}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{flexGrow: 1, paddingBottom: 50}}>
@@ -63,24 +63,24 @@ export function IntroScreen({navigation}: Props) {
         />
         <ImageBackground
           source={step.image}
-          style={styles.background}
+          style={styles.backdrop}
           resizeMode="cover">
           <LinearGradient
             colors={[colors.overlayStart, colors.overlayMid, colors.overlayEnd]}
             locations={[0, 0.35, 0.75]}
-            style={styles.gradient}
+            style={styles.backdropFade}
           />
 
           <IntroHeader showSkip={step.showSkip} onSkip={finishIntro} />
 
           <View
             style={[
-              styles.content,
+              styles.copyColumn,
               {paddingBottom: Math.max(insets.bottom, spacing.lg)},
             ]}>
-            <Text style={styles.title}>{step.title}</Text>
+            <Text style={styles.stepHeading}>{step.title}</Text>
             <StepIndicator activeIndex={stepIndex} />
-            <Text style={styles.body}>{step.body}</Text>
+            <Text style={styles.stepCopy}>{step.body}</Text>
             <IntroPrimaryButton label={step.actionLabel} onPress={goNext} />
           </View>
         </ImageBackground>
@@ -90,27 +90,27 @@ export function IntroScreen({navigation}: Props) {
 }
 
 const styles = StyleSheet.create({
-  root: {
+  screenLayout: {
     flex: 1,
     backgroundColor: colors.background,
   },
-  background: {
+  backdrop: {
     flex: 1,
     justifyContent: 'flex-end',
   },
-  gradient: {
+  backdropFade: {
     ...StyleSheet.absoluteFillObject,
   },
-  content: {
+  copyColumn: {
     paddingHorizontal: introLayout.horizontal,
   },
-  title: {
+  stepHeading: {
     color: colors.heading,
     fontFamily: fonts.montserratExtraBold,
     fontSize: 30,
     lineHeight: 36,
   },
-  body: {
+  stepCopy: {
     marginTop: spacing.md,
     color: colors.textMuted,
     fontFamily: fonts.nunitoRegular,

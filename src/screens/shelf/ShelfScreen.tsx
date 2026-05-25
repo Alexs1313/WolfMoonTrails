@@ -39,7 +39,7 @@ export function ShelfScreen({navigation}: Props) {
   );
 
   const openExplore = useCallback(() => {
-    navigation.getParent()?.navigate(Routes.tabs.overview);
+    navigation.getParent()?.navigate(Routes.tabs.explore);
   }, [navigation]);
 
   const openPlace = useCallback(
@@ -67,7 +67,7 @@ export function ShelfScreen({navigation}: Props) {
         place={item}
         onOpenDetails={() => openPlace(item.id)}
         onOpenMap={() => openMap(item.id)}
-        onRemove={() => handleRemove(item.id)}
+        onDismiss={() => handleRemove(item.id)}
       />
     ),
     [handleRemove, openMap, openPlace],
@@ -76,7 +76,7 @@ export function ShelfScreen({navigation}: Props) {
   const isEmpty = savedPlaces.length === 0;
 
   return (
-    <View style={styles.root}>
+    <View style={styles.screenLayout}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
@@ -109,7 +109,7 @@ export function ShelfScreen({navigation}: Props) {
 }
 
 const styles = StyleSheet.create({
-  root: {
+  screenLayout: {
     flex: 1,
     backgroundColor: colors.background,
   },

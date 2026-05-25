@@ -10,27 +10,30 @@ type Props = {
 
 export function SavedEmptyState({onExplore}: Props) {
   return (
-    <View style={styles.root}>
+    <View style={styles.layout}>
       <Image
         source={require('../../../assets/images/empty_saved.png')}
-        style={styles.wolf}
+        style={styles.illustration}
         resizeMode="contain"
       />
-      <Text style={styles.title}>No Wild Spots Saved Yet</Text>
-      <Text style={styles.body}>
+      <Text style={styles.heading}>No Wild Spots Saved Yet</Text>
+      <Text style={styles.message}>
         Start exploring to find wilderness destinations worth saving for your
         next adventure.
       </Text>
       <Pressable
         accessibilityRole="button"
         onPress={onExplore}
-        style={({pressed}) => [styles.buttonWrap, pressed && styles.pressed]}>
+        style={({pressed}) => [
+          styles.ctaFrame,
+          pressed && styles.ctaFramePressed,
+        ]}>
         <LinearGradient
           colors={[colors.primary, colors.primaryDark]}
           start={{x: 0.15, y: 0}}
           end={{x: 0.85, y: 1}}
-          style={styles.button}>
-          <Text style={styles.buttonLabel}>Explore Wild Trails →</Text>
+          style={styles.cta}>
+          <Text style={styles.ctaLabel}>Explore Wild Trails →</Text>
         </LinearGradient>
       </Pressable>
     </View>
@@ -38,7 +41,7 @@ export function SavedEmptyState({onExplore}: Props) {
 }
 
 const styles = StyleSheet.create({
-  root: {
+  layout: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -46,19 +49,19 @@ const styles = StyleSheet.create({
     paddingBottom: spacing.xxl,
     gap: 14,
   },
-  wolf: {
+  illustration: {
     width: 90,
     height: 90,
     marginTop: 50,
   },
-  title: {
+  heading: {
     color: colors.heading,
     fontFamily: fonts.montserratBold,
     fontSize: 18,
     lineHeight: 27,
     textAlign: 'center',
   },
-  body: {
+  message: {
     color: colors.textDim,
     fontFamily: fonts.nunitoRegular,
     fontSize: 14,
@@ -66,7 +69,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     maxWidth: 290,
   },
-  buttonWrap: {
+  ctaFrame: {
     marginTop: spacing.sm,
     borderRadius: 14,
     shadowColor: colors.primary,
@@ -76,17 +79,16 @@ const styles = StyleSheet.create({
     elevation: 8,
     width: '55%',
   },
-  pressed: {
+  ctaFramePressed: {
     opacity: 0.92,
   },
-  button: {
+  cta: {
     height: 49,
-
     borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  buttonLabel: {
+  ctaLabel: {
     color: colors.text,
     fontFamily: fonts.montserratBold,
     fontSize: 14,

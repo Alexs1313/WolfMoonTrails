@@ -14,51 +14,60 @@ import {placeImages} from '../../data';
 
 type Props = {
   place: Place;
-  saved: boolean;
-  onToggleSave: () => void;
+  isBookmarked: boolean;
+  onToggleBookmark: () => void;
   onViewDetails: () => void;
 };
 
 export function MapPlaceCard({
   place,
-  saved,
-  onToggleSave,
+  isBookmarked,
+  onToggleBookmark,
   onViewDetails,
 }: Props) {
   const category = getCategoryById(place.category);
 
   return (
-    <View style={styles.card}>
+    <View style={styles.panel}>
       <ImageBackground
         source={placeImages[place.imageKey]}
-        style={styles.image}
+        style={styles.media}
         resizeMode="cover">
         <LinearGradient
-          colors={[colors.heroOverlayStart, 'rgba(0,0,0,0)']}
+          colors={[colors.mediaGradientStart, 'rgba(0,0,0,0)']}
           start={{x: 0, y: 0}}
           end={{x: 1, y: 0}}
-          style={styles.gradient}
+          style={styles.mediaFade}
         />
-        <View style={[styles.badge, {backgroundColor: category.color}]}>
-          <Text style={styles.badgeText}>{category.label.toUpperCase()}</Text>
+        <View style={[styles.categoryChip, {backgroundColor: category.color}]}>
+          <Text style={styles.categoryLabel}>
+            {category.label.toUpperCase()}
+          </Text>
         </View>
-        <View style={styles.imageContent}>
-          <Text style={styles.title}>{place.title}</Text>
+        <View style={styles.bannerTextBlock}>
+          <Text style={styles.heading}>{place.title}</Text>
           <View style={styles.locationRow}>
-            <Text style={styles.pin}>◆</Text>
-            <Text style={styles.location}>{place.location}</Text>
+            <Text style={styles.locationGlyph}>◆</Text>
+            <Text style={styles.locationText}>{place.location}</Text>
           </View>
         </View>
       </ImageBackground>
-      <View style={styles.actions}>
+      <View style={styles.actionRow}>
         <Pressable
-          style={[styles.saveButton, saved && styles.saveButtonActive]}
-          onPress={onToggleSave}>
-          <Text style={[styles.saveLabel, saved && styles.saveLabelActive]}>
-            {saved ? 'Saved' : 'Save Spot'}
+          style={[
+            styles.bookmarkControl,
+            isBookmarked && styles.bookmarkControlActive,
+          ]}
+          onPress={onToggleBookmark}>
+          <Text
+            style={[
+              styles.bookmarkLabel,
+              isBookmarked && styles.bookmarkLabelActive,
+            ]}>
+            {isBookmarked ? 'Saved' : 'Save Spot'}
           </Text>
         </Pressable>
-        <Pressable style={styles.detailsButton} onPress={onViewDetails}>
+        <Pressable style={styles.detailsControl} onPress={onViewDetails}>
           <Text style={styles.detailsLabel}>View Details →</Text>
         </Pressable>
       </View>
@@ -67,39 +76,39 @@ export function MapPlaceCard({
 }
 
 const styles = StyleSheet.create({
-  card: {
+  panel: {
     backgroundColor: colors.surface,
     borderRadius: 18,
     borderWidth: 1,
     borderColor: colors.borderFaint,
     overflow: 'hidden',
   },
-  image: {
+  media: {
     height: 120,
     padding: 14,
     justifyContent: 'space-between',
   },
-  gradient: {
+  mediaFade: {
     ...StyleSheet.absoluteFillObject,
   },
-  badge: {
+  categoryChip: {
     alignSelf: 'flex-start',
     borderRadius: 10,
     paddingHorizontal: 8,
     paddingVertical: 8,
     zIndex: 1,
   },
-  badgeText: {
+  categoryLabel: {
     color: colors.text,
     fontFamily: fonts.montserratBold,
     fontSize: 8,
     letterSpacing: 0.5,
   },
-  imageContent: {
+  bannerTextBlock: {
     zIndex: 1,
     gap: 4,
   },
-  title: {
+  heading: {
     color: colors.heading,
     fontFamily: fonts.montserratBold,
     fontSize: 14,
@@ -109,22 +118,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 4,
   },
-  pin: {
+  locationGlyph: {
     color: colors.primary,
     fontSize: 10,
   },
-  location: {
+  locationText: {
     color: colors.textDim,
     fontFamily: fonts.nunitoRegular,
     fontSize: 11,
   },
-  actions: {
+  actionRow: {
     flexDirection: 'row',
     gap: 8,
     paddingHorizontal: 14,
     paddingVertical: 12,
   },
-  saveButton: {
+  bookmarkControl: {
     flex: 1,
     height: 38,
     borderRadius: 12,
@@ -134,18 +143,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  saveButtonActive: {
+  bookmarkControlActive: {
     borderColor: colors.primary,
   },
-  saveLabel: {
+  bookmarkLabel: {
     color: colors.textDim,
     fontFamily: fonts.montserratSemiBold,
     fontSize: 12,
   },
-  saveLabelActive: {
+  bookmarkLabelActive: {
     color: colors.primary,
   },
-  detailsButton: {
+  detailsControl: {
     flex: 1,
     height: 38,
     borderRadius: 12,

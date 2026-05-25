@@ -3,7 +3,6 @@ import {
   ImageBackground,
   Pressable,
   ScrollView,
-  Share,
   StyleSheet,
   Text,
   View,
@@ -20,6 +19,7 @@ import type {
   ShelfStackParamList,
 } from '../../navigation/types';
 import {openPlaceOnWildMap} from '../../navigation/openWildMap';
+import {sharePlace} from '../../utils/sharePlace';
 import {isPlaceSaved, togglePlaceSaved} from '../../utils/savedPlacesStorage';
 
 type PlaceDetailRoute =
@@ -34,29 +34,27 @@ type Props = StackScreenProps<
 export function PlaceDetailScreen({navigation, route}: Props) {
   const insets = useSafeAreaInsets();
   const place = getPlaceById(route.params.id);
-  const [saved, setSaved] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
 
   useEffect(() => {
     if (place) {
-      isPlaceSaved(place.id).then(setSaved);
+      isPlaceSaved(place.id).then(setIsBookmarked);
     }
   }, [place]);
 
-  const handleToggleSave = useCallback(async () => {
+  const handleToggleBookmark = useCallback(async () => {
     if (!place) {
       return;
     }
     const next = await togglePlaceSaved(place.id);
-    setSaved(next);
+    setIsBookmarked(next);
   }, [place]);
 
-  const handleShare = useCallback(async () => {
+  const handleShare = useCallback(() => {
     if (!place) {
       return;
     }
-    await Share.share({
-      message: `${place.title}\n${place.location}\n\n${place.shortDescription}`,
-    });
+    void sharePlace(place);
   }, [place]);
 
   const handleOpenMap = useCallback(() => {
@@ -68,10 +66,10 @@ export function PlaceDetailScreen({navigation, route}: Props) {
 
   if (!place) {
     return (
-      <View style={styles.missing}>
-        <Text style={styles.missingText}>Destination not found.</Text>
+      <View style={styles.notFoundLayout}>
+        <Text style={styles.notFoundMessage}>Destination not found.</Text>
         <Pressable onPress={() => navigation.goBack()}>
-          <Text style={styles.backLink}>Go back</Text>
+          <Text style={styles.navigateBackLabel}>Go back</Text>
         </Pressable>
       </View>
     );
@@ -81,67 +79,76 @@ export function PlaceDetailScreen({navigation, route}: Props) {
   const coords = formatCoordinates(place.latitude, place.longitude);
 
   return (
-    <View style={styles.root}>
+    <View style={styles.screenLayout}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
         contentContainerStyle={{
           paddingBottom: Math.max(insets.bottom, spacing.lg) + 24,
         }}>
-        <View style={styles.heroWrap}>
+        <View style={styles.bannerFrame}>
           <ImageBackground
             source={placeImages[place.imageKey]}
-            style={styles.hero}
+            style={styles.bannerMedia}
             resizeMode="cover">
             <LinearGradient
               colors={['rgba(0,0,0,0.2)', 'rgba(7,12,26,0.95)']}
-              style={styles.heroGradient}
+              style={styles.bannerFade}
             />
-            <View style={[styles.topBar, {paddingTop: insets.top + 8}]}>
+            <View style={[styles.navigationBar, {paddingTop: insets.top + 8}]}>
               <Pressable
                 onPress={() => navigation.goBack()}
-                style={styles.backButton}>
-                <Text style={styles.backIcon}>←</Text>
+                style={styles.navigationControl}>
+                <Text style={styles.navigationGlyph}>←</Text>
               </Pressable>
             </View>
-            <View style={styles.heroContent}>
+            <View style={styles.bannerCaption}>
               <View
                 style={[
-                  styles.categoryBadge,
+                  styles.categoryChip,
                   {backgroundColor: category.color},
                 ]}>
-                <Text style={styles.categoryText}>
+                <Text style={styles.categoryLabel}>
                   {category.label.toUpperCase()}
                 </Text>
               </View>
-              <Text style={styles.title}>{place.title}</Text>
+              <Text style={styles.bannerHeading}>{place.title}</Text>
               <View style={styles.locationRow}>
-                <Text style={styles.pin}>◆</Text>
-                <Text style={styles.location}>{place.location}</Text>
+                <Text style={styles.locationGlyph}>◆</Text>
+                <Text style={styles.locationText}>{place.location}</Text>
               </View>
             </View>
           </ImageBackground>
         </View>
 
-        <View style={styles.content}>
+        <View style={styles.mainContent}>
           <View style={styles.actionsRow}>
             <Pressable style={styles.actionButton} onPress={handleOpenMap}>
-              <Text style={styles.actionIcon}>➤</Text>
+              <Text style={styles.actionGlyph}>➤</Text>
               <Text style={styles.actionLabel}>View on Map</Text>
             </Pressable>
             <Pressable
-              style={[styles.actionButton, saved && styles.actionButtonSaved]}
-              onPress={handleToggleSave}>
+              style={[
+                styles.actionButton,
+                isBookmarked && styles.actionButtonActive,
+              ]}
+              onPress={handleToggleBookmark}>
               <Text
-                style={[styles.actionIcon, saved && styles.actionIconSaved]}>
-                {saved ? '★' : '☆'}
+                style={[
+                  styles.actionGlyph,
+                  isBookmarked && styles.actionGlyphActive,
+                ]}>
+                {isBookmarked ? '★' : '☆'}
               </Text>
               <Text
-                style={[styles.actionLabel, saved && styles.actionLabelSaved]}>
-                {saved ? 'Saved' : 'Save'}
+                style={[
+                  styles.actionLabel,
+                  isBookmarked && styles.actionLabelActive,
+                ]}>
+                {isBookmarked ? 'Saved' : 'Save'}
               </Text>
             </Pressable>
-            <Pressable style={styles.shareSquare} onPress={handleShare}>
+            <Pressable style={styles.shareControl} onPress={handleShare}>
               <Text style={styles.shareIcon}>↗</Text>
             </Pressable>
           </View>
@@ -152,7 +159,7 @@ export function PlaceDetailScreen({navigation, route}: Props) {
           </View>
 
           <Text style={styles.sectionTitle}>ABOUT THIS DESTINATION</Text>
-          <Text style={styles.body}>{place.fullDescription}</Text>
+          <Text style={styles.overviewCopy}>{place.fullDescription}</Text>
 
           <Text style={styles.sectionTitle}>WILDLIFE YOU MAY ENCOUNTER</Text>
           <View style={styles.tagsRow}>
@@ -163,28 +170,28 @@ export function PlaceDetailScreen({navigation, route}: Props) {
 
           <View style={styles.infoCards}>
             <PlaceInfoCard
-              icon="◷"
-              iconColor={colors.yellow}
-              title="BEST TIME TO VISIT"
-              body={place.bestTimeToVisit}
+              leadingSymbol="◷"
+              accentColor={colors.yellow}
+              heading="BEST TIME TO VISIT"
+              summary={place.bestTimeToVisit}
             />
             <PlaceInfoCard
-              icon="!"
-              iconColor={colors.primary}
-              title="SAFETY NOTE"
-              body={place.safetyNote}
+              leadingSymbol="!"
+              accentColor={colors.primary}
+              heading="SAFETY NOTE"
+              summary={place.safetyNote}
             />
             <PlaceInfoCard
-              icon="✦"
-              iconColor={colors.blue}
-              title="SCENIC HIGHLIGHT"
-              body={place.scenicHighlight}
+              leadingSymbol="✦"
+              accentColor={colors.blue}
+              heading="SCENIC HIGHLIGHT"
+              summary={place.scenicHighlight}
             />
             <PlaceInfoCard
-              icon="›"
-              iconColor={colors.green}
-              title="ROUTE ACCESSIBILITY"
-              body={place.accessibility}
+              leadingSymbol="›"
+              accentColor={colors.green}
+              heading="ROUTE ACCESSIBILITY"
+              summary={place.accessibility}
             />
           </View>
 
@@ -197,25 +204,25 @@ export function PlaceDetailScreen({navigation, route}: Props) {
 }
 
 const styles = StyleSheet.create({
-  root: {
+  screenLayout: {
     flex: 1,
     backgroundColor: colors.background,
   },
-  heroWrap: {
+  bannerFrame: {
     height: 320,
   },
-  hero: {
+  bannerMedia: {
     flex: 1,
     justifyContent: 'space-between',
   },
-  heroGradient: {
+  bannerFade: {
     ...StyleSheet.absoluteFillObject,
   },
-  topBar: {
+  navigationBar: {
     paddingHorizontal: spacing.md,
     zIndex: 1,
   },
-  backButton: {
+  navigationControl: {
     width: 40,
     height: 40,
     borderRadius: 20,
@@ -223,28 +230,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  backIcon: {
+  navigationGlyph: {
     color: colors.text,
     fontSize: 20,
   },
-  heroContent: {
+  bannerCaption: {
     padding: spacing.md,
     gap: 8,
     zIndex: 1,
   },
-  categoryBadge: {
+  categoryChip: {
     alignSelf: 'flex-start',
     borderRadius: 20,
     paddingHorizontal: 10,
     paddingVertical: 8,
   },
-  categoryText: {
+  categoryLabel: {
     color: colors.text,
     fontFamily: fonts.montserratBold,
     fontSize: 9,
     letterSpacing: 1,
   },
-  title: {
+  bannerHeading: {
     color: colors.text,
     fontFamily: fonts.montserratExtraBold,
     fontSize: 26,
@@ -255,16 +262,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 6,
   },
-  pin: {
+  locationGlyph: {
     color: colors.primary,
     fontSize: 12,
   },
-  location: {
+  locationText: {
     color: colors.textDim,
     fontFamily: fonts.nunitoRegular,
     fontSize: 14,
   },
-  content: {
+  mainContent: {
     padding: spacing.md,
     gap: 14,
   },
@@ -285,14 +292,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 8,
   },
-  actionButtonSaved: {
+  actionButtonActive: {
     borderColor: colors.primary,
   },
-  actionIcon: {
+  actionGlyph: {
     color: colors.text,
     fontSize: 16,
   },
-  actionIconSaved: {
+  actionGlyphActive: {
     color: colors.primary,
   },
   actionLabel: {
@@ -300,10 +307,10 @@ const styles = StyleSheet.create({
     fontFamily: fonts.montserratBold,
     fontSize: 13,
   },
-  actionLabelSaved: {
+  actionLabelActive: {
     color: colors.primary,
   },
-  shareSquare: {
+  shareControl: {
     width: 48,
     height: 48,
     borderRadius: 14,
@@ -345,7 +352,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     marginTop: 4,
   },
-  body: {
+  overviewCopy: {
     color: colors.textSecondary,
     fontFamily: fonts.nunitoRegular,
     fontSize: 14,
@@ -366,19 +373,19 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 21,
   },
-  missing: {
+  notFoundLayout: {
     flex: 1,
     backgroundColor: colors.background,
     alignItems: 'center',
     justifyContent: 'center',
     gap: 12,
   },
-  missingText: {
+  notFoundMessage: {
     color: colors.text,
     fontFamily: fonts.nunitoRegular,
     fontSize: 16,
   },
-  backLink: {
+  navigateBackLabel: {
     color: colors.primary,
     fontFamily: fonts.montserratBold,
     fontSize: 14,

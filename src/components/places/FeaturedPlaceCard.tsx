@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  ImageBackground,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {ImageBackground, Pressable, StyleSheet, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import {colors, fonts} from '../../consts';
@@ -13,74 +8,102 @@ import {placeImages} from '../../data';
 
 type Props = {
   place: Place;
+  onPress: () => void;
+  onShare: () => void;
 };
 
-export function FeaturedPlaceCard({place}: Props) {
+export function FeaturedPlaceCard({place, onPress, onShare}: Props) {
   return (
-    <View style={styles.card}>
+    <Pressable style={styles.panel} onPress={onPress}>
       <ImageBackground
         source={placeImages[place.imageKey]}
-        style={styles.image}
+        style={styles.media}
         resizeMode="cover">
         <LinearGradient
           colors={[
-            colors.heroOverlayStart,
-            colors.heroOverlayMid,
+            colors.mediaGradientStart,
+            colors.mediaGradientMid,
             'rgba(0,0,0,0)',
           ]}
           locations={[0, 0.6, 1]}
           start={{x: 0, y: 0}}
           end={{x: 1, y: 0}}
-          style={styles.gradient}
+          style={styles.mediaFade}
         />
-        <View style={styles.badge}>
-          <Text style={styles.badgeText}>⭐ FEATURED</Text>
+        <View style={styles.topRow}>
+          <View style={styles.highlightChip}>
+            <Text style={styles.highlightLabel}>⭐ FEATURED</Text>
+          </View>
+          <Pressable
+            style={styles.shareControl}
+            onPress={onShare}
+            hitSlop={8}>
+            <Text style={styles.shareGlyph}>↗</Text>
+          </Pressable>
         </View>
-        <View style={styles.footer}>
-          <Text style={styles.title}>{place.title}</Text>
+        <View style={styles.captionBlock}>
+          <Text style={styles.heading}>{place.title}</Text>
           <View style={styles.locationRow}>
-            <Text style={styles.pin}>◆</Text>
-            <Text style={styles.location}>{place.location}</Text>
+            <Text style={styles.locationGlyph}>◆</Text>
+            <Text style={styles.locationText}>{place.location}</Text>
           </View>
         </View>
       </ImageBackground>
-    </View>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  card: {
+  panel: {
     borderRadius: 20,
     overflow: 'hidden',
     height: 190,
   },
-  image: {
+  media: {
     flex: 1,
     justifyContent: 'space-between',
     padding: 14,
   },
-  gradient: {
+  mediaFade: {
     ...StyleSheet.absoluteFillObject,
   },
-  badge: {
-    alignSelf: 'flex-start',
+  topRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    zIndex: 1,
+  },
+  highlightChip: {
     backgroundColor: colors.primary,
     borderRadius: 20,
     paddingHorizontal: 10,
     paddingVertical: 8,
-    zIndex: 1,
   },
-  badgeText: {
+  shareControl: {
+    width: 34,
+    height: 34,
+    borderRadius: 12,
+    backgroundColor: 'rgba(7, 12, 26, 0.7)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.12)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  shareGlyph: {
+    color: colors.textDim,
+    fontSize: 15,
+  },
+  highlightLabel: {
     color: colors.text,
     fontFamily: fonts.montserratBold,
     fontSize: 9,
     letterSpacing: 1,
   },
-  footer: {
+  captionBlock: {
     zIndex: 1,
     gap: 4,
   },
-  title: {
+  heading: {
     color: colors.heading,
     fontFamily: fonts.montserratExtraBold,
     fontSize: 16,
@@ -90,11 +113,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 4,
   },
-  pin: {
+  locationGlyph: {
     color: colors.primary,
     fontSize: 11,
   },
-  location: {
+  locationText: {
     color: colors.primary,
     fontFamily: fonts.nunitoRegular,
     fontSize: 11,

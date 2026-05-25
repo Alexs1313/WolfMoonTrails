@@ -66,15 +66,15 @@ const LOADER_HTML = `<!DOCTYPE html>
 </body>
 </html>`;
 
-const CUP_WIDTH = 80;
-const CUP_HEIGHT = 90;
+const PROGRESS_WIDTH = 80;
+const PROGRESS_HEIGHT = 90;
 
 export function LoaderSunProgress() {
   return (
-    <View style={styles.wrap}>
+    <View style={styles.progressFrame}>
       <WebView
         source={{html: LOADER_HTML}}
-        style={styles.webview}
+        style={styles.progressSurface}
         scrollEnabled={false}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
@@ -91,14 +91,14 @@ export function LoaderSunProgress() {
 }
 
 const styles = StyleSheet.create({
-  wrap: {
-    width: CUP_WIDTH,
-    height: CUP_HEIGHT,
+  progressFrame: {
+    width: PROGRESS_WIDTH,
+    height: PROGRESS_HEIGHT,
     overflow: 'hidden',
   },
-  webview: {
-    width: CUP_WIDTH,
-    height: CUP_HEIGHT,
+  progressSurface: {
+    width: PROGRESS_WIDTH,
+    height: PROGRESS_HEIGHT,
     backgroundColor: 'transparent',
   },
 });

@@ -10,11 +10,14 @@ type Props = {
 
 export function QuizStars({count, max = 3}: Props) {
   return (
-    <View style={styles.row}>
+    <View style={styles.ratingRow}>
       {Array.from({length: max}).map((_, index) => (
         <Text
           key={index}
-          style={[styles.star, index < count ? styles.filled : styles.empty]}>
+          style={[
+            styles.ratingGlyph,
+            index < count ? styles.ratingActive : styles.ratingInactive,
+          ]}>
           ★
         </Text>
       ))}
@@ -23,18 +26,18 @@ export function QuizStars({count, max = 3}: Props) {
 }
 
 const styles = StyleSheet.create({
-  row: {
+  ratingRow: {
     flexDirection: 'row',
     gap: 8,
     justifyContent: 'center',
   },
-  star: {
+  ratingGlyph: {
     fontSize: 28,
   },
-  filled: {
+  ratingActive: {
     color: colors.yellow,
   },
-  empty: {
+  ratingInactive: {
     color: 'rgba(234, 179, 8, 0.25)',
   },
 });

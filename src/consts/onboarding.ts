@@ -13,7 +13,7 @@ export const INTRO_STEP_COUNT = 5;
 
 export const introSteps: IntroStep[] = [
   {
-    id: 'step-1',
+    id: 'discover-nature',
     title: 'Discover Wild Nature',
     body: 'Explore scenic wilderness places that welcome travelers and reveal unforgettable wildlife moments.',
     image: require('../../assets/images/onboarding/step-1.png'),
@@ -21,7 +21,7 @@ export const introSteps: IntroStep[] = [
     showSkip: true,
   },
   {
-    id: 'step-2',
+    id: 'find-trails',
     title: 'Find Wild Trails',
     body: 'Browse carefully selected destinations, natural routes, and wildlife-friendly landscapes open to visitors.',
     image: require('../../assets/images/onboarding/step-2.png'),
@@ -29,7 +29,7 @@ export const introSteps: IntroStep[] = [
     showSkip: true,
   },
   {
-    id: 'step-3',
+    id: 'stay-smart-outdoors',
     title: 'Stay Smart Outdoors',
     body: 'Understand how to behave around wolves, bears, and other wild animals before starting your journey.',
     image: require('../../assets/images/onboarding/step-3.png'),
@@ -37,7 +37,7 @@ export const introSteps: IntroStep[] = [
     showSkip: false,
   },
   {
-    id: 'step-4',
+    id: 'know-the-wild',
     title: 'Know the Wild Better',
     body: 'Learn about animal behavior, safe distances, and useful travel tips for remote natural places.',
     image: require('../../assets/images/onboarding/step-4.png'),
@@ -45,7 +45,7 @@ export const introSteps: IntroStep[] = [
     showSkip: true,
   },
   {
-    id: 'step-5',
+    id: 'build-your-list',
     title: 'Build Your Wild List',
     body: 'Save your favorite spots, return to them anytime, and plan your next wilderness adventure.',
     image: require('../../assets/images/onboarding/step-5.png'),

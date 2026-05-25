@@ -14,13 +14,13 @@ type Props = StackScreenProps<
 export function RegionDetailScreen({route}: Props) {
   return (
     <ScreenContainer>
-      <Text style={styles.title}>Region {route.params.id}</Text>
+      <Text style={styles.heading}>Region {route.params.id}</Text>
     </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  title: {
+  heading: {
     fontSize: 20,
     color: colors.text,
     marginTop: spacing.md,

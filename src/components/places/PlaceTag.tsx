@@ -9,14 +9,14 @@ type Props = {
 
 export function PlaceTag({label}: Props) {
   return (
-    <View style={styles.tag}>
-      <Text style={styles.label}>{label}</Text>
+    <View style={styles.chip}>
+      <Text style={styles.chipLabel}>{label}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  tag: {
+  chip: {
     backgroundColor: colors.chipBg,
     borderWidth: 1,
     borderColor: colors.borderLight,
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 3,
   },
-  label: {
+  chipLabel: {
     color: colors.textDim,
     fontFamily: fonts.nunitoRegular,
     fontSize: 10,

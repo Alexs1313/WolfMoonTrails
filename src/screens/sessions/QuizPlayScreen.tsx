@@ -79,10 +79,10 @@ export function QuizPlayScreen({navigation, route}: Props) {
 
   if (!level || !question) {
     return (
-      <View style={styles.missing}>
-        <Text style={styles.missingText}>Level not found.</Text>
+      <View style={styles.notFoundLayout}>
+        <Text style={styles.notFoundMessage}>Level not found.</Text>
         <Pressable onPress={() => navigation.goBack()}>
-          <Text style={styles.backLink}>Go back</Text>
+          <Text style={styles.navigateBackLabel}>Go back</Text>
         </Pressable>
       </View>
     );
@@ -92,16 +92,16 @@ export function QuizPlayScreen({navigation, route}: Props) {
   const isCorrect = selectedOption?.correct ?? false;
 
   return (
-    <View style={[styles.root, {paddingTop: insets.top + 10}]}>
-      <View style={styles.header}>
+    <View style={[styles.screenLayout, {paddingTop: insets.top + 10}]}>
+      <View style={styles.topBar}>
         <Pressable
           onPress={() => navigation.goBack()}
-          style={styles.backButton}>
-          <Text style={styles.backIcon}>←</Text>
+          style={styles.navigationControl}>
+          <Text style={styles.navigationGlyph}>←</Text>
         </Pressable>
-        <View style={styles.headerCenter}>
+        <View style={styles.topBarCenter}>
           <Text style={styles.bolt}>⚡</Text>
-          <Text style={styles.headerTitle}>{level.title}</Text>
+          <Text style={styles.screenHeading}>{level.title}</Text>
         </View>
         <Text style={styles.counter}>
           {questionIndex + 1}/{total}
@@ -119,7 +119,7 @@ export function QuizPlayScreen({navigation, route}: Props) {
           {paddingBottom: Math.max(insets.bottom, spacing.lg) + 24},
         ]}
         showsVerticalScrollIndicator={false}>
-        <View style={styles.questionCard}>
+        <View style={styles.promptPanel}>
           <View style={styles.questionIcon}>
             <Text style={styles.questionBolt}>⚡</Text>
           </View>
@@ -202,28 +202,28 @@ export function QuizPlayScreen({navigation, route}: Props) {
 }
 
 const styles = StyleSheet.create({
-  root: {
+  screenLayout: {
     flex: 1,
     backgroundColor: colors.background,
   },
-  header: {
+  topBar: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: spacing.md,
     paddingBottom: spacing.sm,
     gap: 8,
   },
-  backButton: {
+  navigationControl: {
     width: 36,
     height: 36,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  backIcon: {
+  navigationGlyph: {
     color: colors.text,
     fontSize: 22,
   },
-  headerCenter: {
+  topBarCenter: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     color: colors.primary,
     fontSize: 16,
   },
-  headerTitle: {
+  screenHeading: {
     color: colors.heading,
     fontFamily: fonts.montserratBold,
     fontSize: 15,
@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     gap: 14,
   },
-  questionCard: {
+  promptPanel: {
     backgroundColor: colors.surface,
     borderRadius: 18,
     borderWidth: 1,
@@ -392,19 +392,19 @@ const styles = StyleSheet.create({
     fontFamily: fonts.montserratBold,
     fontSize: 15,
   },
-  missing: {
+  notFoundLayout: {
     flex: 1,
     backgroundColor: colors.background,
     alignItems: 'center',
     justifyContent: 'center',
     gap: 12,
   },
-  missingText: {
+  notFoundMessage: {
     color: colors.text,
     fontFamily: fonts.nunitoRegular,
     fontSize: 16,
   },
-  backLink: {
+  navigateBackLabel: {
     color: colors.primary,
     fontFamily: fonts.montserratBold,
     fontSize: 14,

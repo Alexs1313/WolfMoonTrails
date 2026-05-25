@@ -21,27 +21,31 @@ type Props = StackScreenProps<
   typeof Routes.library.detail
 >;
 
-function TipList({
-  title,
-  titleColor,
+function GuidanceList({
+  heading,
+  headingColor,
   items,
-  icon,
-  iconColor,
+  marker,
+  markerColor,
 }: {
-  title: string;
-  titleColor: string;
+  heading: string;
+  headingColor: string;
   items: string[];
-  icon: string;
-  iconColor: string;
+  marker: string;
+  markerColor: string;
 }) {
   return (
-    <View style={styles.section}>
-      <Text style={[styles.sectionTitle, {color: titleColor}]}>{title}</Text>
-      <View style={styles.list}>
+    <View style={styles.guidanceSection}>
+      <Text style={[styles.guidanceHeading, {color: headingColor}]}>
+        {heading}
+      </Text>
+      <View style={styles.guidanceItems}>
         {items.map(item => (
-          <View key={item} style={styles.listItem}>
-            <Text style={[styles.listIcon, {color: iconColor}]}>{icon}</Text>
-            <Text style={styles.listText}>{item}</Text>
+          <View key={item} style={styles.guidanceRow}>
+            <Text style={[styles.guidanceMarker, {color: markerColor}]}>
+              {marker}
+            </Text>
+            <Text style={styles.guidanceCopy}>{item}</Text>
           </View>
         ))}
       </View>
@@ -55,79 +59,79 @@ export function AnimalDetailScreen({navigation, route}: Props) {
 
   if (!animal) {
     return (
-      <View style={styles.missing}>
-        <Text style={styles.missingText}>Animal not found.</Text>
+      <View style={styles.notFoundLayout}>
+        <Text style={styles.notFoundMessage}>Animal not found.</Text>
         <Pressable onPress={() => navigation.goBack()}>
-          <Text style={styles.backLink}>Go back</Text>
+          <Text style={styles.navigateBackLabel}>Go back</Text>
         </Pressable>
       </View>
     );
   }
 
   return (
-    <View style={styles.root}>
+    <View style={styles.screenLayout}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
         contentContainerStyle={{
           paddingBottom: Math.max(insets.bottom, spacing.lg) + 80,
         }}>
-        <View style={styles.heroWrap}>
+        <View style={styles.bannerFrame}>
           <ImageBackground
             source={guideAnimalImages[animal.id]}
-            style={styles.hero}
+            style={styles.bannerMedia}
             resizeMode="cover">
             <LinearGradient
               colors={['rgba(0,0,0,0.15)', 'rgba(7,12,26,0.95)']}
-              style={styles.heroGradient}
+              style={styles.bannerFade}
             />
-            <View style={[styles.topBar, {paddingTop: insets.top + 8}]}>
+            <View style={[styles.navigationBar, {paddingTop: insets.top + 8}]}>
               <Pressable
                 onPress={() => navigation.goBack()}
-                style={styles.backButton}>
-                <Text style={styles.backIcon}>←</Text>
+                style={styles.navigationControl}>
+                <Text style={styles.navigationGlyph}>←</Text>
               </Pressable>
             </View>
-            <View style={styles.heroContent}>
-              <Text style={styles.heroTitle}>{animal.name}</Text>
+            <View style={styles.bannerCaption}>
+              <Text style={styles.bannerHeading}>{animal.name}</Text>
             </View>
           </ImageBackground>
         </View>
 
-        <View style={styles.content}>
-          <View style={styles.safetyBanner}>
-            <Text style={styles.shieldIcon}>🛡</Text>
-            <Text style={styles.safetyText}>
+        <View style={styles.mainContent}>
+          <View style={styles.distanceNotice}>
+            <Text style={styles.distanceGlyph}>🛡</Text>
+            <Text style={styles.distanceCopy}>
               Safe distance: {formatSafeDistance(animal.safeDistanceMeters)}
             </Text>
           </View>
 
-          <Text style={styles.description}>{animal.description}</Text>
+          <Text style={styles.overviewCopy}>{animal.description}</Text>
 
-          <View style={styles.habitatCard}>
-            <Text style={styles.habitatLabel}>🗺 HABITAT</Text>
-            <Text style={styles.habitatText}>{animal.habitat}</Text>
+          <View style={styles.habitatPanel}>
+            <Text style={styles.habitatHeading}>🗺 HABITAT</Text>
+            <Text style={styles.habitatCopy}>{animal.habitat}</Text>
           </View>
 
-          <TipList
-            title="BEHAVIOR TIPS"
-            titleColor={colors.heading}
+          <GuidanceList
+            heading="BEHAVIOR TIPS"
+            headingColor={colors.heading}
             items={animal.behaviorTips}
-            icon="✓"
-            iconColor={colors.green}
+            marker="✓"
+            markerColor={colors.green}
           />
 
-          <TipList
-            title="WHAT NOT TO DO"
-            titleColor={colors.warningHeading}
+          <GuidanceList
+            heading="WHAT NOT TO DO"
+            headingColor={colors.warningHeading}
             items={animal.whatNotToDo}
-            icon="✕"
-            iconColor={colors.error}
+            marker="✕"
+            markerColor={colors.error}
           />
 
-          <View style={styles.wildFactCard}>
-            <Text style={styles.wildFactLabel}>⚡ WILD FACT</Text>
-            <Text style={styles.wildFactText}>{animal.wildFact}</Text>
+          <View style={styles.insightPanel}>
+            <Text style={styles.insightHeading}>⚡ FIELD NOTE</Text>
+            <Text style={styles.insightCopy}>{animal.insightNote}</Text>
           </View>
         </View>
       </ScrollView>
@@ -136,42 +140,42 @@ export function AnimalDetailScreen({navigation, route}: Props) {
 }
 
 const styles = StyleSheet.create({
-  root: {
+  screenLayout: {
     flex: 1,
     backgroundColor: colors.background,
   },
-  missing: {
+  notFoundLayout: {
     flex: 1,
     backgroundColor: colors.background,
     alignItems: 'center',
     justifyContent: 'center',
     gap: spacing.md,
   },
-  missingText: {
+  notFoundMessage: {
     color: colors.textDim,
     fontFamily: fonts.nunitoRegular,
     fontSize: 16,
   },
-  backLink: {
+  navigateBackLabel: {
     color: colors.primary,
     fontFamily: fonts.montserratSemiBold,
     fontSize: 15,
   },
-  heroWrap: {
+  bannerFrame: {
     height: 280,
   },
-  hero: {
+  bannerMedia: {
     flex: 1,
     justifyContent: 'space-between',
   },
-  heroGradient: {
+  bannerFade: {
     ...StyleSheet.absoluteFillObject,
   },
-  topBar: {
+  navigationBar: {
     paddingHorizontal: spacing.md,
     zIndex: 1,
   },
-  backButton: {
+  navigationControl: {
     width: 40,
     height: 40,
     borderRadius: 20,
@@ -181,26 +185,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  backIcon: {
+  navigationGlyph: {
     color: colors.text,
     fontSize: 20,
   },
-  heroContent: {
+  bannerCaption: {
     paddingHorizontal: spacing.md,
     paddingBottom: spacing.lg,
     zIndex: 1,
   },
-  heroTitle: {
+  bannerHeading: {
     color: colors.text,
     fontFamily: fonts.montserratExtraBold,
     fontSize: 28,
   },
-  content: {
+  mainContent: {
     paddingHorizontal: spacing.md,
     paddingTop: spacing.md,
     gap: spacing.lg,
   },
-  safetyBanner: {
+  distanceNotice: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
@@ -211,23 +215,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 12,
   },
-  shieldIcon: {
+  distanceGlyph: {
     fontSize: 16,
   },
-  safetyText: {
+  distanceCopy: {
     flex: 1,
     color: colors.purpleLight,
     fontFamily: fonts.nunitoMedium,
     fontSize: 13,
     lineHeight: 18,
   },
-  description: {
+  overviewCopy: {
     color: colors.textSecondary,
     fontFamily: fonts.nunitoRegular,
     fontSize: 14,
     lineHeight: 21,
   },
-  habitatCard: {
+  habitatPanel: {
     backgroundColor: colors.surface,
     borderRadius: 14,
     borderWidth: 1,
@@ -235,62 +239,62 @@ const styles = StyleSheet.create({
     padding: 14,
     gap: 8,
   },
-  habitatLabel: {
+  habitatHeading: {
     color: colors.textDim,
     fontFamily: fonts.montserratBold,
     fontSize: 11,
     letterSpacing: 0.8,
   },
-  habitatText: {
+  habitatCopy: {
     color: colors.heading,
     fontFamily: fonts.nunitoRegular,
     fontSize: 14,
     lineHeight: 20,
   },
-  section: {
+  guidanceSection: {
     gap: 12,
   },
-  sectionTitle: {
+  guidanceHeading: {
     fontFamily: fonts.montserratBold,
     fontSize: 12,
     letterSpacing: 0.8,
   },
-  list: {
+  guidanceItems: {
     gap: 10,
   },
-  listItem: {
+  guidanceRow: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     gap: 10,
   },
-  listIcon: {
+  guidanceMarker: {
     fontFamily: fonts.montserratBold,
     fontSize: 14,
     lineHeight: 20,
     width: 16,
   },
-  listText: {
+  guidanceCopy: {
     flex: 1,
     color: colors.textSecondary,
     fontFamily: fonts.nunitoRegular,
     fontSize: 13.5,
     lineHeight: 20,
   },
-  wildFactCard: {
-    backgroundColor: colors.wildFactBg,
+  insightPanel: {
+    backgroundColor: colors.insightAccentBg,
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: colors.wildFactBorder,
+    borderColor: colors.insightAccentBorder,
     padding: 14,
     gap: 8,
   },
-  wildFactLabel: {
+  insightHeading: {
     color: colors.yellow,
     fontFamily: fonts.montserratBold,
     fontSize: 11,
     letterSpacing: 0.8,
   },
-  wildFactText: {
+  insightCopy: {
     color: colors.heading,
     fontFamily: fonts.nunitoRegular,
     fontSize: 14,

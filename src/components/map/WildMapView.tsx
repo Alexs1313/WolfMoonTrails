@@ -91,7 +91,7 @@ export function WildMapView({places, selectedId, onSelect}: Props) {
   }, [places, selectedId]);
 
   return (
-    <View style={styles.wrap}>
+    <View style={styles.mapFrame}>
       <MapView
         ref={mapRef}
         provider={PROVIDER_GOOGLE}
@@ -117,14 +117,14 @@ export function WildMapView({places, selectedId, onSelect}: Props) {
             onPress={() => onSelect(place.id)}
             tracksViewChanges={shouldTrackMarkerChanges(place.id)}>
             <MapPinMarker
-              selected={place.id === selectedId}
+              isFocused={place.id === selectedId}
               onPress={() => onSelect(place.id)}
             />
           </Marker>
         ))}
       </MapView>
       {selectedPlace && (
-        <View style={styles.overlay} pointerEvents="none">
+        <View style={styles.floatingPanel} pointerEvents="none">
           <MapOverlayCard place={selectedPlace} />
         </View>
       )}
@@ -133,7 +133,7 @@ export function WildMapView({places, selectedId, onSelect}: Props) {
 }
 
 const styles = StyleSheet.create({
-  wrap: {
+  mapFrame: {
     height: 384,
     borderRadius: 16,
     overflow: 'hidden',
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject,
   },
-  overlay: {
+  floatingPanel: {
     position: 'absolute',
     left: 10,
     right: 10,

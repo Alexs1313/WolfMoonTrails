@@ -14,13 +14,13 @@ type Props = StackScreenProps<
 export function ShelfDetailScreen({route}: Props) {
   return (
     <ScreenContainer>
-      <Text style={styles.title}>Pin {route.params.id}</Text>
+      <Text style={styles.heading}>Entry {route.params.id}</Text>
     </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  title: {
+  heading: {
     fontSize: 20,
     color: colors.text,
     marginTop: spacing.md,

@@ -10,13 +10,13 @@ type Props = {
 
 export function StepIndicator({activeIndex, total = INTRO_STEP_COUNT}: Props) {
   return (
-    <View style={styles.row}>
+    <View style={styles.markerRow}>
       {Array.from({length: total}).map((_, index) => {
-        const active = index === activeIndex;
+        const isCurrent = index === activeIndex;
         return (
           <View
             key={index}
-            style={[styles.dot, active && styles.dotActive]}
+            style={[styles.stepMarker, isCurrent && styles.stepMarkerCurrent]}
           />
         );
       })}
@@ -25,19 +25,19 @@ export function StepIndicator({activeIndex, total = INTRO_STEP_COUNT}: Props) {
 }
 
 const styles = StyleSheet.create({
-  row: {
+  markerRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
     marginTop: spacing.sm,
   },
-  dot: {
+  stepMarker: {
     width: 8,
     height: 8,
     borderRadius: 4,
     backgroundColor: colors.dotInactive,
   },
-  dotActive: {
+  stepMarkerCurrent: {
     width: 24,
     height: 8,
     borderRadius: 4,

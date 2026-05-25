@@ -3,6 +3,8 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 
 import {colors, fonts} from '../../consts';
 
+const brandMark = require('../../../assets/images/logo-wolf.png');
+
 function getGreeting(): string {
   const hour = new Date().getHours();
   if (hour < 12) {
@@ -16,22 +18,22 @@ function getGreeting(): string {
 
 export function PlacesHeader() {
   return (
-    <View style={styles.row}>
-      <View style={styles.textBlock}>
+    <View style={styles.headerRow}>
+      <View style={styles.copyBlock}>
         <Text style={styles.greeting}>{getGreeting()}</Text>
-        <View style={styles.titleRow}>
+        <View style={styles.headingRow}>
           <Image
-            source={require('../../../assets/images/logo-wolf.png')}
-            style={styles.logo}
+            source={brandMark}
+            style={styles.brandMark}
             resizeMode="contain"
           />
-          <Text style={styles.title}>Wild Moon Trails</Text>
+          <Text style={styles.heading}>Wild Moon Trails</Text>
         </View>
       </View>
-      <View style={styles.avatar}>
+      <View style={styles.profileFrame}>
         <Image
           source={require('../../../assets/images/apicon.png')}
-          style={styles.avatarImage}
+          style={styles.profileImage}
           resizeMode="cover"
         />
       </View>
@@ -40,12 +42,12 @@ export function PlacesHeader() {
 }
 
 const styles = StyleSheet.create({
-  row: {
+  headerRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  textBlock: {
+  copyBlock: {
     flex: 1,
     gap: 2,
   },
@@ -54,28 +56,28 @@ const styles = StyleSheet.create({
     fontFamily: fonts.nunitoRegular,
     fontSize: 12,
   },
-  titleRow: {
+  headingRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
   },
-  logo: {
+  brandMark: {
     width: 28,
     height: 28,
   },
-  title: {
+  heading: {
     color: colors.heading,
     fontFamily: fonts.montserratExtraBold,
     fontSize: 20,
   },
-  avatar: {
+  profileFrame: {
     width: 40,
     height: 40,
     borderRadius: 14,
     overflow: 'hidden',
     backgroundColor: colors.surfaceMuted,
   },
-  avatarImage: {
+  profileImage: {
     width: '100%',
     height: '100%',
   },

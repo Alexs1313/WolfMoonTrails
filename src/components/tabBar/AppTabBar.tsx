@@ -11,9 +11,9 @@ export function AppTabBar({state, descriptors, navigation}: BottomTabBarProps) {
   const insets = useSafeAreaInsets();
 
   return (
-    <View style={[styles.bar, {paddingBottom: Math.max(insets.bottom, 8)}]}>
+    <View style={[styles.tabBar, {paddingBottom: Math.max(insets.bottom, 8)}]}>
       {state.routes.map((route, index) => {
-        const focused = state.index === index;
+        const isFocused = state.index === index;
         const {options} = descriptors[route.key];
         const tab = tabItems.find(item => item.route === route.name);
         const label =
@@ -28,7 +28,7 @@ export function AppTabBar({state, descriptors, navigation}: BottomTabBarProps) {
             target: route.key,
             canPreventDefault: true,
           });
-          if (!focused && !event.defaultPrevented) {
+          if (!isFocused && !event.defaultPrevented) {
             navigation.navigate(route.name);
           }
         };
@@ -37,11 +37,11 @@ export function AppTabBar({state, descriptors, navigation}: BottomTabBarProps) {
           <Pressable
             key={route.key}
             accessibilityRole="button"
-            accessibilityState={focused ? {selected: true} : {}}
+            accessibilityState={isFocused ? {selected: true} : {}}
             onPress={onPress}
-            style={styles.item}>
-            <TabIcon route={route.name as TabRouteName} focused={focused} />
-            <Text style={[styles.label, focused && styles.labelActive]}>
+            style={styles.tabItem}>
+            <TabIcon route={route.name as TabRouteName} isFocused={isFocused} />
+            <Text style={[styles.tabLabel, isFocused && styles.tabLabelActive]}>
               {String(label).toUpperCase()}
             </Text>
           </Pressable>
@@ -52,25 +52,25 @@ export function AppTabBar({state, descriptors, navigation}: BottomTabBarProps) {
 }
 
 const styles = StyleSheet.create({
-  bar: {
+  tabBar: {
     flexDirection: 'row',
     backgroundColor: colors.background,
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: colors.border,
     paddingTop: 8,
   },
-  item: {
+  tabItem: {
     flex: 1,
     alignItems: 'center',
   },
-  label: {
+  tabLabel: {
     marginTop: tabBarLayout.iconLabelGap,
     fontSize: 9,
     fontWeight: '600',
     fontFamily: 'Montserrat-Medium',
     color: colors.textMuted,
   },
-  labelActive: {
+  tabLabelActive: {
     color: colors.primary,
   },
 });

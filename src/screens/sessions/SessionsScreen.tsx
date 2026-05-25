@@ -34,33 +34,33 @@ export function SessionsScreen({navigation}: Props) {
   return (
     <View
       style={[
-        styles.root,
+        styles.screenLayout,
         {
           paddingTop: insets.top,
           paddingBottom: Math.max(insets.bottom, spacing.lg) + 80,
         },
       ]}>
-      <View style={styles.header}>
-        <View style={styles.titleRow}>
-          <Text style={styles.bolt}>⚡</Text>
-          <Text style={styles.title}>Wildlife Quiz</Text>
+      <View style={styles.headerBlock}>
+        <View style={styles.headingRow}>
+          <Text style={styles.accentGlyph}>⚡</Text>
+          <Text style={styles.heading}>Wildlife Quiz</Text>
         </View>
-        <Text style={styles.subtitle}>
+        <Text style={styles.description}>
           Test your wilderness knowledge across multiple levels
         </Text>
       </View>
 
-      <View style={styles.heroWrap}>
+      <View style={styles.illustrationFrame}>
         <Image
           source={require('../../../assets/images/quiz/wildlife-quiz-hero.png')}
-          style={styles.hero}
+          style={styles.illustration}
           resizeMode="contain"
         />
       </View>
 
-      <View style={styles.introCard}>
-        <Text style={styles.cardTitle}>Before You Enter the Wild</Text>
-        <Text style={styles.cardBody}>
+      <View style={styles.introPanel}>
+        <Text style={styles.introHeading}>Before You Enter the Wild</Text>
+        <Text style={styles.introCopy}>
           Learn how to stay calm, keep distance, and make smart decisions around
           wolves, bears, and other wildlife.
         </Text>
@@ -73,45 +73,45 @@ export function SessionsScreen({navigation}: Props) {
 }
 
 const styles = StyleSheet.create({
-  root: {
+  screenLayout: {
     flex: 1,
     backgroundColor: colors.background,
     paddingHorizontal: spacing.md,
   },
-  header: {
+  headerBlock: {
     gap: 6,
     paddingTop: spacing.sm,
   },
-  titleRow: {
+  headingRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
   },
-  bolt: {
+  accentGlyph: {
     fontSize: 22,
     color: colors.primary,
   },
-  title: {
+  heading: {
     color: colors.heading,
     fontFamily: fonts.montserratExtraBold,
     fontSize: 20,
   },
-  subtitle: {
+  description: {
     color: colors.textDim,
     fontFamily: fonts.nunitoRegular,
     fontSize: 13,
   },
-  heroWrap: {
+  illustrationFrame: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: 200,
   },
-  hero: {
+  illustration: {
     width: 242,
     height: 320,
   },
-  introCard: {
+  introPanel: {
     backgroundColor: colors.surface,
     borderRadius: 18,
     borderWidth: 1,
@@ -119,13 +119,13 @@ const styles = StyleSheet.create({
     padding: 21,
     gap: 14,
   },
-  cardTitle: {
+  introHeading: {
     color: colors.heading,
     fontFamily: fonts.montserratBold,
     fontSize: 16,
     lineHeight: 24,
   },
-  cardBody: {
+  introCopy: {
     color: colors.textDim,
     fontFamily: fonts.nunitoRegular,
     fontSize: 13,

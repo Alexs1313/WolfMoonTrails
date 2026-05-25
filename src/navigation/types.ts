@@ -29,14 +29,15 @@ export type ShelfStackParamList = {
 };
 
 export type TabParamList = {
-  [Routes.tabs.overview]: NavigatorScreenParams<OverviewStackParamList>;
-  [Routes.tabs.regions]: NavigatorScreenParams<RegionsStackParamList>;
-  [Routes.tabs.sessions]: NavigatorScreenParams<SessionsStackParamList>;
-  [Routes.tabs.library]: NavigatorScreenParams<LibraryStackParamList>;
-  [Routes.tabs.shelf]: NavigatorScreenParams<ShelfStackParamList>;
+  [Routes.tabs.explore]: NavigatorScreenParams<OverviewStackParamList>;
+  [Routes.tabs.map]: NavigatorScreenParams<RegionsStackParamList>;
+  [Routes.tabs.quiz]: NavigatorScreenParams<SessionsStackParamList>;
+  [Routes.tabs.guide]: NavigatorScreenParams<LibraryStackParamList>;
+  [Routes.tabs.saved]: NavigatorScreenParams<ShelfStackParamList>;
 };
 
 export type RootStackParamList = {
+  [Routes.root.loader]: undefined;
   [Routes.root.intro]: undefined;
   [Routes.root.main]: NavigatorScreenParams<TabParamList>;
 };

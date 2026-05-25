@@ -6,21 +6,21 @@ import type {TabRouteName} from '../../consts';
 
 type Props = {
   route: TabRouteName;
-  focused: boolean;
+  isFocused: boolean;
 };
 
 const ICON_SIZE = 24;
 
-export function TabIcon({route, focused}: Props) {
+export function TabIcon({route, isFocused}: Props) {
   return (
-    <View style={styles.wrap}>
+    <View style={styles.iconFrame}>
       <Image
         source={tabIcons[route]}
         style={[
-          styles.icon,
+          styles.tabGraphic,
           {
-            tintColor: focused ? colors.primary : colors.textMuted,
-            opacity: focused ? 1 : 0.55,
+            tintColor: isFocused ? colors.primary : colors.textMuted,
+            opacity: isFocused ? 1 : 0.55,
           },
         ]}
         resizeMode="contain"
@@ -30,13 +30,13 @@ export function TabIcon({route, focused}: Props) {
 }
 
 const styles = StyleSheet.create({
-  wrap: {
+  iconFrame: {
     width: ICON_SIZE,
     height: ICON_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  icon: {
+  tabGraphic: {
     width: ICON_SIZE,
     height: ICON_SIZE,
   },

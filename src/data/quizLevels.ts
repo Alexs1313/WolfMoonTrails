@@ -398,7 +398,7 @@ export const quizLevels: QuizLevel[] = [
   },
   {
     id: 'sky-hunters-field-ethics',
-    title: 'Sky Hunters and Field Ethics',
+    title: 'Sky Watchers and Field Ethics',
     order: 5,
     questions: [
       q(
@@ -454,7 +454,7 @@ export const quizLevels: QuizLevel[] = [
         'What is respectful behavior at a birdwatching viewpoint?',
         [
           'Stay quiet, give space, and avoid blocking others',
-          'Play music while waiting',
+          'Make loud noise while waiting',
           'Shout when a bird appears',
           'Walk into closed habitat for a better angle',
         ],
@@ -920,7 +920,7 @@ export const quizLevels: QuizLevel[] = [
         'respecting-wild-places-6',
         'Why should dogs be controlled or restricted in wildlife areas?',
         [
-          'Wild animals like playing with dogs',
+          'Wild animals always enjoy meeting dogs',
           'Dogs can disturb wildlife, trigger defensive behavior, or be at risk',
           'Dogs always scare bears away',
           'Dogs can guide predators away',

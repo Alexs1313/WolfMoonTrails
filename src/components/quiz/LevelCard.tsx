@@ -7,7 +7,7 @@ import {QuizStars} from './QuizStars';
 
 type Props = {
   level: QuizLevel;
-  locked: boolean;
+  isLocked: boolean;
   stars: number;
   bestScore: number;
   onPress: () => void;
@@ -15,7 +15,7 @@ type Props = {
 
 export function LevelCard({
   level,
-  locked,
+  isLocked,
   stars,
   bestScore,
   onPress,
@@ -23,32 +23,32 @@ export function LevelCard({
   return (
     <Pressable
       onPress={onPress}
-      disabled={locked}
-      style={[styles.card, locked && styles.cardLocked]}>
-      <View style={styles.header}>
-        <View style={styles.levelBadge}>
-          <Text style={styles.levelNumber}>{level.order}</Text>
+      disabled={isLocked}
+      style={[styles.panel, isLocked && styles.panelMuted]}>
+      <View style={styles.headerRow}>
+        <View style={styles.orderBadge}>
+          <Text style={styles.orderLabel}>{level.order}</Text>
         </View>
-        <View style={styles.textBlock}>
-          <Text style={[styles.title, locked && styles.titleLocked]}>
+        <View style={styles.copyBlock}>
+          <Text style={[styles.heading, isLocked && styles.headingMuted]}>
             {level.title}
           </Text>
           <Text style={styles.meta}>
-            {locked
+            {isLocked
               ? 'Complete previous level to unlock'
               : `${level.questions.length} questions`}
           </Text>
         </View>
-        {locked ? (
-          <Text style={styles.lockIcon}>🔒</Text>
+        {isLocked ? (
+          <Text style={styles.statusGlyph}>🔒</Text>
         ) : (
-          <Text style={styles.arrow}>→</Text>
+          <Text style={styles.navGlyph}>→</Text>
         )}
       </View>
-      {!locked && stars > 0 && (
-        <View style={styles.footer}>
+      {!isLocked && stars > 0 && (
+        <View style={styles.footerRow}>
           <QuizStars count={stars} />
-          <Text style={styles.score}>
+          <Text style={styles.scoreLabel}>
             Best: {bestScore}/{level.questions.length}
           </Text>
         </View>
@@ -58,7 +58,7 @@ export function LevelCard({
 }
 
 const styles = StyleSheet.create({
-  card: {
+  panel: {
     backgroundColor: colors.surface,
     borderRadius: 18,
     borderWidth: 1,
@@ -66,15 +66,15 @@ const styles = StyleSheet.create({
     padding: 16,
     gap: 12,
   },
-  cardLocked: {
+  panelMuted: {
     opacity: 0.55,
   },
-  header: {
+  headerRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
   },
-  levelBadge: {
+  orderBadge: {
     width: 36,
     height: 36,
     borderRadius: 12,
@@ -82,21 +82,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  levelNumber: {
+  orderLabel: {
     color: colors.primary,
     fontFamily: fonts.montserratBold,
     fontSize: 14,
   },
-  textBlock: {
+  copyBlock: {
     flex: 1,
     gap: 2,
   },
-  title: {
+  heading: {
     color: colors.heading,
     fontFamily: fonts.montserratBold,
     fontSize: 15,
   },
-  titleLocked: {
+  headingMuted: {
     color: colors.textDim,
   },
   meta: {
@@ -104,21 +104,21 @@ const styles = StyleSheet.create({
     fontFamily: fonts.nunitoRegular,
     fontSize: 12,
   },
-  lockIcon: {
+  statusGlyph: {
     fontSize: 16,
   },
-  arrow: {
+  navGlyph: {
     color: colors.primary,
     fontSize: 18,
     fontFamily: fonts.montserratBold,
   },
-  footer: {
+  footerRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingTop: 4,
   },
-  score: {
+  scoreLabel: {
     color: colors.textDim,
     fontFamily: fonts.nunitoRegular,
     fontSize: 11,

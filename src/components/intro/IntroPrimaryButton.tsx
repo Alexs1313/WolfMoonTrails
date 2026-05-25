@@ -14,20 +14,23 @@ export function IntroPrimaryButton({label, onPress}: Props) {
     <Pressable
       accessibilityRole="button"
       onPress={onPress}
-      style={({pressed}) => [styles.wrap, pressed && styles.pressed]}>
+      style={({pressed}) => [
+        styles.shadowFrame,
+        pressed && styles.shadowFramePressed,
+      ]}>
       <LinearGradient
         colors={[colors.primary, colors.primaryDark]}
         start={{x: 0.15, y: 0}}
         end={{x: 0.85, y: 1}}
-        style={styles.button}>
-        <Text style={styles.label}>{label}</Text>
+        style={styles.gradientSurface}>
+        <Text style={styles.actionLabel}>{label}</Text>
       </LinearGradient>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  wrap: {
+  shadowFrame: {
     marginTop: spacing.lg,
     borderRadius: introLayout.buttonRadius,
     shadowColor: colors.primary,
@@ -36,16 +39,16 @@ const styles = StyleSheet.create({
     shadowRadius: 16,
     elevation: 8,
   },
-  pressed: {
+  shadowFramePressed: {
     opacity: 0.92,
   },
-  button: {
+  gradientSurface: {
     height: introLayout.buttonHeight,
     borderRadius: introLayout.buttonRadius,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  label: {
+  actionLabel: {
     color: colors.text,
     fontFamily: fonts.montserratBold,
     fontSize: 16,

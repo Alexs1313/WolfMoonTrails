@@ -19,10 +19,10 @@ function getSubtitle(count: number): string {
 
 export function SavedSpotsHeader({count}: Props) {
   return (
-    <View style={styles.root}>
-      <View style={styles.titleRow}>
-        <Text style={styles.icon}>🔖</Text>
-        <Text style={styles.title}>Saved Spots</Text>
+    <View style={styles.layout}>
+      <View style={styles.headingRow}>
+        <Text style={styles.leadingGlyph}>🔖</Text>
+        <Text style={styles.heading}>Saved Spots</Text>
       </View>
       <Text style={styles.subtitle}>{getSubtitle(count)}</Text>
     </View>
@@ -30,19 +30,19 @@ export function SavedSpotsHeader({count}: Props) {
 }
 
 const styles = StyleSheet.create({
-  root: {
+  layout: {
     gap: 4,
   },
-  titleRow: {
+  headingRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
   },
-  icon: {
+  leadingGlyph: {
     fontSize: 22,
     color: colors.primary,
   },
-  title: {
+  heading: {
     color: colors.heading,
     fontFamily: fonts.montserratExtraBold,
     fontSize: 20,

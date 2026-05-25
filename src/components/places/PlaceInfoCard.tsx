@@ -4,26 +4,33 @@ import {StyleSheet, Text, View} from 'react-native';
 import {colors, fonts} from '../../consts';
 
 type Props = {
-  icon: string;
-  iconColor: string;
-  title: string;
-  body: string;
+  leadingSymbol: string;
+  accentColor: string;
+  heading: string;
+  summary: string;
 };
 
-export function PlaceInfoCard({icon, iconColor, title, body}: Props) {
+export function PlaceInfoCard({
+  leadingSymbol,
+  accentColor,
+  heading,
+  summary,
+}: Props) {
   return (
-    <View style={styles.card}>
-      <View style={styles.header}>
-        <Text style={[styles.icon, {color: iconColor}]}>{icon}</Text>
-        <Text style={[styles.title, {color: iconColor}]}>{title}</Text>
+    <View style={styles.panel}>
+      <View style={styles.headingRow}>
+        <Text style={[styles.leadingSymbol, {color: accentColor}]}>
+          {leadingSymbol}
+        </Text>
+        <Text style={[styles.heading, {color: accentColor}]}>{heading}</Text>
       </View>
-      <Text style={styles.body}>{body}</Text>
+      <Text style={styles.summary}>{summary}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  card: {
+  panel: {
     backgroundColor: colors.surface,
     borderRadius: 14,
     borderWidth: 1,
@@ -31,20 +38,20 @@ const styles = StyleSheet.create({
     padding: 16,
     gap: 8,
   },
-  header: {
+  headingRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
   },
-  icon: {
+  leadingSymbol: {
     fontSize: 14,
   },
-  title: {
+  heading: {
     fontFamily: fonts.montserratBold,
     fontSize: 11,
     letterSpacing: 0.5,
   },
-  body: {
+  summary: {
     color: colors.text,
     fontFamily: fonts.nunitoRegular,
     fontSize: 14,

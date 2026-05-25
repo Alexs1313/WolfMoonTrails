@@ -1,7 +1,6 @@
 import React, {useCallback, useMemo, useState} from 'react';
 import {
   FlatList,
-  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -27,6 +26,7 @@ import {
 } from '../../consts';
 import {featuredPlace, places, type Place} from '../../data';
 import type {OverviewStackParamList} from '../../navigation/types';
+import {sharePlace} from '../../utils/sharePlace';
 import {
   getSavedPlaceIds,
   togglePlaceSaved,
@@ -86,20 +86,25 @@ export function PlacesScreen({navigation}: Props) {
     );
   }, []);
 
+  const handleShare = useCallback((place: Place) => {
+    void sharePlace(place);
+  }, []);
+
   const renderPlace = useCallback(
     ({item}: {item: Place}) => (
       <PlaceListCard
         place={item}
-        saved={savedIds.includes(item.id)}
+        isBookmarked={savedIds.includes(item.id)}
         onPress={() => openPlace(item.id)}
-        onToggleSave={() => handleToggleSave(item.id)}
+        onToggleBookmark={() => handleToggleSave(item.id)}
+        onShare={() => handleShare(item)}
       />
     ),
-    [handleToggleSave, openPlace, savedIds],
+    [handleShare, handleToggleSave, openPlace, savedIds],
   );
 
   return (
-    <View style={[styles.root]}>
+    <View style={styles.screenLayout}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
@@ -122,11 +127,16 @@ export function PlacesScreen({navigation}: Props) {
             <View style={styles.headerBlock}>
               <PlacesHeader />
               <PlaceSearchBar value={search} onChangeText={setSearch} />
-              <Pressable onPress={() => openPlace(featuredPlace.id)}>
-                <FeaturedPlaceCard place={featuredPlace} />
-              </Pressable>
+              <FeaturedPlaceCard
+                place={featuredPlace}
+                onPress={() => openPlace(featuredPlace.id)}
+                onShare={() => handleShare(featuredPlace)}
+              />
               <Text style={styles.sectionTitle}>CATEGORIES</Text>
-              <CategoryFilter active={category} onChange={setCategory} />
+              <CategoryFilter
+                activeCategory={category}
+                onChange={setCategory}
+              />
               <Text style={styles.sectionTitle}>DESTINATIONS</Text>
             </View>
           }
@@ -140,7 +150,7 @@ export function PlacesScreen({navigation}: Props) {
 }
 
 const styles = StyleSheet.create({
-  root: {
+  screenLayout: {
     flex: 1,
     backgroundColor: colors.background,
   },

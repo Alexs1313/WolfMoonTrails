@@ -53,34 +53,34 @@ export function QuizResultScreen({navigation, route}: Props) {
   return (
     <View
       style={[
-        styles.root,
+        styles.screenLayout,
         {
           paddingTop: insets.top + spacing.lg,
           paddingBottom: Math.max(insets.bottom, spacing.lg) + 80,
         },
       ]}>
-      <View style={styles.content}>
-        <View style={styles.trophyWrap}>
-          <Text style={styles.trophy}>🏆</Text>
+      <View style={styles.contentColumn}>
+        <View style={styles.badgeFrame}>
+          <Text style={styles.badgeGlyph}>🏆</Text>
         </View>
-        <Text style={styles.title}>Level Complete!</Text>
-        <Text style={styles.levelName}>{level.title}</Text>
+        <Text style={styles.heading}>Level Complete!</Text>
+        <Text style={styles.levelLabel}>{level.title}</Text>
         <QuizStars count={stars} />
-        <View style={styles.scoreCard}>
-          <Text style={styles.score}>
+        <View style={styles.resultPanel}>
+          <Text style={styles.resultValue}>
             {correctCount}/{total}
           </Text>
-          <Text style={styles.scoreLabel}>Questions answered correctly</Text>
+          <Text style={styles.resultCaption}>Questions answered correctly</Text>
         </View>
-        <View style={styles.actions}>
-          <Pressable style={styles.retryButton} onPress={handleRetry}>
-            <Text style={styles.retryIcon}>↻</Text>
+        <View style={styles.actionRow}>
+          <Pressable style={styles.retryControl} onPress={handleRetry}>
+            <Text style={styles.retryGlyph}>↻</Text>
             <Text style={styles.retryLabel}>Retry</Text>
           </Pressable>
           <Pressable
-            style={styles.nextButton}
+            style={styles.continueControl}
             onPress={nextLevelId ? handleNext : handleDone}>
-            <Text style={styles.nextLabel}>
+            <Text style={styles.continueLabel}>
               {nextLevelId ? 'Next Level →' : 'Done'}
             </Text>
           </Pressable>
@@ -91,18 +91,18 @@ export function QuizResultScreen({navigation, route}: Props) {
 }
 
 const styles = StyleSheet.create({
-  root: {
+  screenLayout: {
     flex: 1,
     backgroundColor: colors.background,
     paddingHorizontal: spacing.md,
   },
-  content: {
+  contentColumn: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     gap: 16,
   },
-  trophyWrap: {
+  badgeFrame: {
     width: 80,
     height: 80,
     borderRadius: 20,
@@ -116,21 +116,21 @@ const styles = StyleSheet.create({
     shadowRadius: 16,
     shadowOffset: {width: 0, height: 0},
   },
-  trophy: {
+  badgeGlyph: {
     fontSize: 36,
   },
-  title: {
+  heading: {
     color: colors.heading,
     fontFamily: fonts.montserratExtraBold,
     fontSize: 26,
   },
-  levelName: {
+  levelLabel: {
     color: colors.textDim,
     fontFamily: fonts.nunitoRegular,
     fontSize: 15,
     marginTop: -8,
   },
-  scoreCard: {
+  resultPanel: {
     width: '100%',
     backgroundColor: colors.surface,
     borderRadius: 18,
@@ -142,24 +142,24 @@ const styles = StyleSheet.create({
     gap: 6,
     marginTop: 8,
   },
-  score: {
+  resultValue: {
     color: colors.primary,
     fontFamily: fonts.montserratExtraBold,
     fontSize: 48,
     fontStyle: 'italic',
   },
-  scoreLabel: {
+  resultCaption: {
     color: colors.textDim,
     fontFamily: fonts.nunitoRegular,
     fontSize: 13,
   },
-  actions: {
+  actionRow: {
     flexDirection: 'row',
     gap: 10,
     width: '100%',
     marginTop: 8,
   },
-  retryButton: {
+  retryControl: {
     flex: 1,
     height: 48,
     borderRadius: 14,
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 8,
   },
-  retryIcon: {
+  retryGlyph: {
     color: colors.textDim,
     fontSize: 18,
   },
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.montserratSemiBold,
     fontSize: 14,
   },
-  nextButton: {
+  continueControl: {
     flex: 1,
     height: 48,
     borderRadius: 14,
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  nextLabel: {
+  continueLabel: {
     color: colors.text,
     fontFamily: fonts.montserratBold,
     fontSize: 14,

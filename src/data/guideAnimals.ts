@@ -8,7 +8,7 @@ export type GuideAnimal = {
   habitat: string;
   behaviorTips: string[];
   whatNotToDo: string[];
-  wildFact: string;
+  insightNote: string;
 };
 
 export const guideAnimals: GuideAnimal[] = [
@@ -32,7 +32,7 @@ export const guideAnimals: GuideAnimal[] = [
       'Never approach pups or a den site.',
       'Never try to call wolves closer for photos.',
     ],
-    wildFact:
+    insightNote:
       'Wolves can travel many miles in one day while searching for food or moving through their territory.',
   },
   {
@@ -55,7 +55,7 @@ export const guideAnimals: GuideAnimal[] = [
       'Never feed a bear or leave food scraps.',
       'Never get between a mother bear and her cubs.',
     ],
-    wildFact:
+    insightNote:
       'Brown bears can smell food from very far away, which is why food storage rules are critical in bear country.',
   },
   {
@@ -78,7 +78,7 @@ export const guideAnimals: GuideAnimal[] = [
       'Never block its path.',
       'Never assume a moose is harmless because it is eating.',
     ],
-    wildFact:
+    insightNote:
       'Moose are excellent swimmers and can dive underwater to feed on aquatic plants.',
   },
   {
@@ -101,7 +101,7 @@ export const guideAnimals: GuideAnimal[] = [
       'Never stand between adults and calves.',
       'Never treat bison like farm animals.',
     ],
-    wildFact:
+    insightNote:
       'Bison can run much faster than humans, even though they look heavy and slow.',
   },
   {
@@ -124,7 +124,7 @@ export const guideAnimals: GuideAnimal[] = [
       'Never use food to attract birds.',
       'Never disturb an eagle while it is feeding or resting.',
     ],
-    wildFact:
+    insightNote:
       'Bald eagles often reuse the same nest for many years, adding new material each season until the nest becomes enormous.',
   },
   {
@@ -147,7 +147,7 @@ export const guideAnimals: GuideAnimal[] = [
       'Never approach kittens or hidden den areas.',
       'Never leave food scraps that may attract smaller prey animals.',
     ],
-    wildFact:
+    insightNote:
       'Lynx have wide, furry paws that work almost like natural snowshoes, helping them move across deep snow.',
   },
   {
@@ -170,7 +170,7 @@ export const guideAnimals: GuideAnimal[] = [
       'Never imitate elk calls near wild herds.',
       'Never feed elk or let them approach your campsite.',
     ],
-    wildFact:
+    insightNote:
       'Male elk can produce a loud bugling call that carries across valleys during mating season.',
   },
   {
@@ -193,7 +193,7 @@ export const guideAnimals: GuideAnimal[] = [
       'Never leave snacks near a trail or picnic area.',
       'Never follow it toward a den.',
     ],
-    wildFact:
+    insightNote:
       'Red foxes use their large ears to detect small animals moving under grass or snow.',
   },
   {
@@ -216,7 +216,7 @@ export const guideAnimals: GuideAnimal[] = [
       'Never feed them.',
       'Never stand near dangerous drop-offs for a better photo.',
     ],
-    wildFact:
+    insightNote:
       'Mountain goats can climb extremely steep rocky slopes thanks to specialized hooves with rough pads and sharp edges.',
   },
   {
@@ -239,7 +239,7 @@ export const guideAnimals: GuideAnimal[] = [
       'Never disturb an owl while it is hunting or resting.',
       'Never fly drones near nesting or roosting areas.',
     ],
-    wildFact:
+    insightNote:
       'Great horned owls fly almost silently because their wing feathers are shaped to reduce noise.',
   },
 ];

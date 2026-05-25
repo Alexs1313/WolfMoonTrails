@@ -1,25 +1,25 @@
 import React from 'react';
 import {Image, Pressable, StyleSheet} from 'react-native';
 
-const mapPinDefault = require('../../../assets/images/map/tabler_map-pin-filled.png');
-const mapPinSelected = require('../../../assets/images/map/map_pin.png');
+const markerAssetResting = require('../../../assets/images/map/tabler_map-pin-filled.png');
+const markerAssetFocused = require('../../../assets/images/map/map_pin.png');
 
 type Props = {
-  selected: boolean;
+  isFocused: boolean;
   onPress: () => void;
 };
 
-const PIN_WIDTH = 28;
-const PIN_HEIGHT = 36;
+const MARKER_WIDTH = 28;
+const MARKER_HEIGHT = 36;
 
-export const mapPinSize = {width: PIN_WIDTH, height: PIN_HEIGHT};
+export const markerDimensions = {width: MARKER_WIDTH, height: MARKER_HEIGHT};
 
-export function MapPinMarker({selected, onPress}: Props) {
+export function MapPinMarker({isFocused, onPress}: Props) {
   return (
-    <Pressable onPress={onPress} hitSlop={10} style={styles.wrap}>
+    <Pressable onPress={onPress} hitSlop={10} style={styles.markerFrame}>
       <Image
-        source={selected ? mapPinSelected : mapPinDefault}
-        style={styles.icon}
+        source={isFocused ? markerAssetFocused : markerAssetResting}
+        style={styles.markerGraphic}
         resizeMode="contain"
       />
     </Pressable>
@@ -27,14 +27,14 @@ export function MapPinMarker({selected, onPress}: Props) {
 }
 
 const styles = StyleSheet.create({
-  wrap: {
-    width: PIN_WIDTH,
-    height: PIN_HEIGHT,
+  markerFrame: {
+    width: MARKER_WIDTH,
+    height: MARKER_HEIGHT,
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
-  icon: {
-    width: PIN_WIDTH,
-    height: PIN_HEIGHT,
+  markerGraphic: {
+    width: MARKER_WIDTH,
+    height: MARKER_HEIGHT,
   },
 });

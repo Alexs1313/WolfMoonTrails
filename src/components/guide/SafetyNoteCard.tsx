@@ -12,24 +12,24 @@ type Props = {
 export function SafetyNoteCard({note, onPress}: Props) {
   const content = (
     <>
-      <Text style={styles.title}>{note.title}</Text>
-      <Text style={styles.description}>{note.description}</Text>
+      <Text style={styles.heading}>{note.title}</Text>
+      <Text style={styles.summary}>{note.description}</Text>
     </>
   );
 
   if (!onPress) {
-    return <View style={styles.card}>{content}</View>;
+    return <View style={styles.panel}>{content}</View>;
   }
 
   return (
-    <Pressable style={styles.card} onPress={onPress}>
+    <Pressable style={styles.panel} onPress={onPress}>
       {content}
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  card: {
+  panel: {
     backgroundColor: colors.surface,
     borderRadius: 14,
     borderWidth: 1,
@@ -37,13 +37,13 @@ const styles = StyleSheet.create({
     padding: 16,
     gap: 8,
   },
-  title: {
+  heading: {
     color: colors.heading,
     fontFamily: fonts.montserratBold,
     fontSize: 15,
     lineHeight: 20,
   },
-  description: {
+  summary: {
     color: colors.textSecondary,
     fontFamily: fonts.nunitoRegular,
     fontSize: 13,

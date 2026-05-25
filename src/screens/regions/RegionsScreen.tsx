@@ -99,7 +99,7 @@ export function RegionsScreen({navigation, route}: Props) {
   }, [navigation, selectedPlace]);
 
   return (
-    <View style={[styles.root]}>
+    <View style={styles.screenLayout}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
@@ -107,13 +107,13 @@ export function RegionsScreen({navigation, route}: Props) {
           paddingBottom: Math.max(insets.bottom, spacing.lg) + 80,
           paddingTop: insets.top,
         }}>
-        <View style={styles.content}>
-          <Text style={styles.title}>Wild Map</Text>
-          <Text style={styles.subtitle}>
-            Tap a pin to explore a destination
+        <View style={styles.mainColumn}>
+          <Text style={styles.heading}>Trail Map</Text>
+          <Text style={styles.description}>
+            Tap a marker to explore a destination
           </Text>
           <CategoryFilter
-            active={category}
+            activeCategory={category}
             onChange={handleCategoryChange}
             compact
           />
@@ -124,8 +124,8 @@ export function RegionsScreen({navigation, route}: Props) {
           />
           <MapPlaceCard
             place={selectedPlace}
-            saved={savedIds.includes(selectedPlace.id)}
-            onToggleSave={handleToggleSave}
+            isBookmarked={savedIds.includes(selectedPlace.id)}
+            onToggleBookmark={handleToggleSave}
             onViewDetails={openDetails}
           />
         </View>
@@ -135,22 +135,22 @@ export function RegionsScreen({navigation, route}: Props) {
 }
 
 const styles = StyleSheet.create({
-  root: {
+  screenLayout: {
     flex: 1,
     backgroundColor: colors.background,
   },
-  content: {
+  mainColumn: {
     flex: 1,
     paddingHorizontal: spacing.md,
     gap: 16,
     paddingTop: spacing.sm,
   },
-  title: {
+  heading: {
     color: colors.heading,
     fontFamily: fonts.montserratExtraBold,
     fontSize: 20,
   },
-  subtitle: {
+  description: {
     color: colors.textDim,
     fontFamily: fonts.nunitoRegular,
     fontSize: 13,

@@ -4,7 +4,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {colors, fonts, spacing} from '../../consts';
 
-const logoWolf = require('../../../assets/images/logo-wolf.png');
+const brandMark = require('../../../assets/images/logo-wolf.png');
 
 type Props = {
   showSkip: boolean;
@@ -17,7 +17,7 @@ export function IntroHeader({showSkip, onSkip}: Props) {
   return (
     <View style={[styles.header, {paddingTop: insets.top + spacing.sm}]}>
       <View style={styles.brand}>
-        <Image source={logoWolf} style={styles.logo} resizeMode="contain" />
+        <Image source={brandMark} style={styles.brandMark} resizeMode="contain" />
         <Text style={styles.brandText}>WILD MOON</Text>
       </View>
       {showSkip ? (
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: spacing.sm,
   },
-  logo: {
+  brandMark: {
     width: 30,
     height: 30,
   },

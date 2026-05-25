@@ -21,8 +21,8 @@ export const colors = {
   guidePurpleBg: 'rgba(147, 51, 234, 0.14)',
   guidePurpleBorder: 'rgba(147, 51, 234, 0.35)',
   warningHeading: '#FF6B6B',
-  wildFactBorder: 'rgba(234, 179, 8, 0.45)',
-  wildFactBg: 'rgba(234, 179, 8, 0.08)',
+  insightAccentBorder: 'rgba(234, 179, 8, 0.45)',
+  insightAccentBg: 'rgba(234, 179, 8, 0.08)',
   green: '#22C55E',
   blue: '#3B82F6',
   yellow: '#EAB308',
@@ -36,9 +36,9 @@ export const colors = {
   overlayStart: 'rgba(7, 12, 26, 0.25)',
   overlayMid: 'rgba(7, 12, 26, 0.5)',
   overlayEnd: 'rgba(7, 12, 26, 0.97)',
-  heroOverlayStart: 'rgba(7, 12, 26, 0.85)',
-  heroOverlayMid: 'rgba(7, 12, 26, 0.4)',
-  cardOverlayEnd: 'rgba(7, 12, 26, 0.75)',
+  mediaGradientStart: 'rgba(7, 12, 26, 0.85)',
+  mediaGradientMid: 'rgba(7, 12, 26, 0.4)',
+  surfaceOverlayEnd: 'rgba(7, 12, 26, 0.75)',
 } as const;
 
 export const spacing = {

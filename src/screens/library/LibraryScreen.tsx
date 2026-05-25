@@ -69,7 +69,7 @@ export function LibraryScreen({navigation}: Props) {
   }, []);
 
   return (
-    <View style={styles.root}>
+    <View style={styles.screenLayout}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
@@ -79,7 +79,10 @@ export function LibraryScreen({navigation}: Props) {
         }}>
         <View style={styles.headerBlock}>
           <GuideHeader />
-          <GuideSegmentedControl active={activeTab} onChange={setActiveTab} />
+          <GuideSegmentedControl
+            activeSection={activeTab}
+            onChange={setActiveTab}
+          />
           <Text style={styles.hint}>
             {activeTab === 'animals' ? ANIMAL_HINT : SAFETY_HINT}
           </Text>
@@ -109,7 +112,7 @@ export function LibraryScreen({navigation}: Props) {
 }
 
 const styles = StyleSheet.create({
-  root: {
+  screenLayout: {
     flex: 1,
     backgroundColor: colors.background,
   },

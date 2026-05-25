@@ -6,27 +6,34 @@ import {colors, fonts} from '../../consts';
 export type GuideTab = 'animals' | 'safety';
 
 type Props = {
-  active: GuideTab;
+  activeSection: GuideTab;
   onChange: (tab: GuideTab) => void;
 };
 
-const tabs: {id: GuideTab; label: string}[] = [
+const sections: {id: GuideTab; label: string}[] = [
   {id: 'animals', label: 'Animal Guide'},
   {id: 'safety', label: 'Wild Safety'},
 ];
 
-export function GuideSegmentedControl({active, onChange}: Props) {
+export function GuideSegmentedControl({activeSection, onChange}: Props) {
   return (
-    <View style={styles.container}>
-      {tabs.map(tab => {
-        const isActive = tab.id === active;
+    <View style={styles.segmentFrame}>
+      {sections.map(section => {
+        const isSelected = section.id === activeSection;
         return (
           <Pressable
-            key={tab.id}
-            onPress={() => onChange(tab.id)}
-            style={[styles.tab, isActive && styles.tabActive]}>
-            <Text style={[styles.tabText, isActive && styles.tabTextActive]}>
-              {tab.label}
+            key={section.id}
+            onPress={() => onChange(section.id)}
+            style={[
+              styles.segment,
+              isSelected && styles.segmentSelected,
+            ]}>
+            <Text
+              style={[
+                styles.segmentLabel,
+                isSelected && styles.segmentLabelSelected,
+              ]}>
+              {section.label}
             </Text>
           </Pressable>
         );
@@ -36,7 +43,7 @@ export function GuideSegmentedControl({active, onChange}: Props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  segmentFrame: {
     flexDirection: 'row',
     backgroundColor: colors.surface,
     borderRadius: 14,
@@ -45,24 +52,24 @@ const styles = StyleSheet.create({
     padding: 4,
     gap: 4,
   },
-  tab: {
+  segment: {
     flex: 1,
     paddingVertical: 12,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  tabActive: {
+  segmentSelected: {
     backgroundColor: colors.surfaceMuted,
     borderWidth: 1,
     borderColor: colors.borderLight,
   },
-  tabText: {
+  segmentLabel: {
     color: colors.textDim,
     fontFamily: fonts.montserratSemiBold,
     fontSize: 13,
   },
-  tabTextActive: {
+  segmentLabelSelected: {
     color: colors.text,
   },
 });

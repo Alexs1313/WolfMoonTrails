@@ -9,33 +9,33 @@ import {
 } from '../../consts';
 
 type Props = {
-  active: PlaceCategoryFilter;
+  activeCategory: PlaceCategoryFilter;
   onChange: (category: PlaceCategoryFilter) => void;
   compact?: boolean;
 };
 
-export function CategoryFilter({active, onChange, compact}: Props) {
+export function CategoryFilter({activeCategory, onChange, compact}: Props) {
   return (
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={styles.row}>
+      contentContainerStyle={styles.filterRow}>
       {placeCategoryFilters.map(item => {
-        const selected = item.id === active;
+        const isSelected = item.id === activeCategory;
         return (
           <Pressable
             key={item.id}
             onPress={() => onChange(item.id)}
             style={[
-              styles.chip,
-              compact && styles.chipCompact,
-              selected && styles.chipActive,
+              styles.filterChip,
+              compact && styles.filterChipCompact,
+              isSelected && styles.filterChipSelected,
             ]}>
             <Text
               style={[
-                styles.label,
-                compact && styles.labelCompact,
-                selected && styles.labelActive,
+                styles.filterLabel,
+                compact && styles.filterLabelCompact,
+                isSelected && styles.filterLabelSelected,
               ]}>
               {item.label}
             </Text>
@@ -47,11 +47,11 @@ export function CategoryFilter({active, onChange, compact}: Props) {
 }
 
 const styles = StyleSheet.create({
-  row: {
+  filterRow: {
     gap: 8,
     paddingBottom: 4,
   },
-  chip: {
+  filterChip: {
     backgroundColor: colors.chipBg,
     borderWidth: 1,
     borderColor: colors.borderLight,
@@ -59,24 +59,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 6,
   },
-  chipCompact: {
+  filterChipCompact: {
     borderRadius: 18,
     paddingHorizontal: 12,
     paddingVertical: 5,
   },
-  chipActive: {
+  filterChipSelected: {
     backgroundColor: colors.primary,
     borderColor: colors.primary,
   },
-  label: {
+  filterLabel: {
     color: colors.textDim,
     fontFamily: fonts.montserratBold,
     fontSize: 11,
   },
-  labelCompact: {
+  filterLabelCompact: {
     fontSize: 10,
   },
-  labelActive: {
+  filterLabelSelected: {
     color: colors.text,
   },
 });

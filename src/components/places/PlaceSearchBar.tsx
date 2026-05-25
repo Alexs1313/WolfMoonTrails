@@ -10,7 +10,7 @@ type Props = {
 
 export function PlaceSearchBar({value, onChangeText}: Props) {
   return (
-    <View style={styles.wrap}>
+    <View style={styles.inputFrame}>
       <TextInput
         value={value}
         onChangeText={onChangeText}
@@ -26,7 +26,7 @@ export function PlaceSearchBar({value, onChangeText}: Props) {
 }
 
 const styles = StyleSheet.create({
-  wrap: {
+  inputFrame: {
     backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.08)',

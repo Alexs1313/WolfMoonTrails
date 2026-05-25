@@ -1,27 +1,42 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native';
+import type {StackScreenProps} from '@react-navigation/stack';
 
 import {LoaderSunProgress} from '../../components/loader';
-import {colors, fonts} from '../../consts';
+import {LOADER_DURATION_MS, Routes, colors, fonts} from '../../consts';
+import type {RootStackParamList} from '../../navigation/types';
 
-const appIcon = require('../../../assets/images/loader/app-icon.png');
+type Props = StackScreenProps<RootStackParamList, typeof Routes.root.loader>;
 
-export function LoaderScreen() {
+const appIcon = require('../../../assets/images/loader_icon.png');
+
+export function LoaderScreen({navigation}: Props) {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigation.reset({
+        index: 0,
+        routes: [{name: Routes.root.intro}],
+      });
+    }, LOADER_DURATION_MS);
+
+    return () => clearTimeout(timer);
+  }, [navigation]);
+
   return (
     <ImageBackground
       source={require('../../../assets/images/loader_background.png')}
-      style={styles.root}>
-      <View style={[styles.content]}>
+      style={styles.screenLayout}>
+      <View style={styles.contentColumn}>
         <View style={styles.brandBlock}>
-          <Image source={appIcon} style={styles.icon} resizeMode="cover" />
-          <Text style={styles.wolfMoon}>WOLF MOON</Text>
-          <Text style={styles.trails}>TRAILS</Text>
-          <Text style={styles.tagline}>Explore. Discover. Survive.</Text>
+          <Image source={appIcon} style={styles.brandIcon} resizeMode="cover" />
+          <Text style={styles.accentBrandLine}>WILD MOOD</Text>
+          <Text style={styles.productNameLine}>TRAILS</Text>
+          <Text style={styles.tagline}>Explore. Discover. Learn.</Text>
         </View>
 
-        <View style={styles.loaderBlock}>
+        <View style={styles.progressBlock}>
           <LoaderSunProgress />
-          <Text style={styles.loadingText}>Loading your wilderness…</Text>
+          <Text style={styles.statusMessage}>Loading your wilderness…</Text>
         </View>
       </View>
     </ImageBackground>
@@ -29,39 +44,21 @@ export function LoaderScreen() {
 }
 
 const styles = StyleSheet.create({
-  root: {
+  screenLayout: {
     flex: 1,
     backgroundColor: colors.background,
   },
-  content: {
+  contentColumn: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  moonGlow: {
-    position: 'absolute',
-    top: '28%',
-    alignSelf: 'center',
-    width: 220,
-    height: 220,
-    borderRadius: 110,
-    backgroundColor: 'rgba(255, 215, 56, 0.12)',
-  },
-  moonGlowInner: {
-    position: 'absolute',
-    top: '32%',
-    alignSelf: 'center',
-    width: 160,
-    height: 160,
-    borderRadius: 80,
-    backgroundColor: 'rgba(255, 170, 0, 0.18)',
   },
   brandBlock: {
     alignItems: 'center',
     gap: 6,
     marginTop: 55,
   },
-  icon: {
+  brandIcon: {
     width: 116,
     height: 116,
     borderRadius: 20,
@@ -72,7 +69,7 @@ const styles = StyleSheet.create({
     shadowRadius: 19,
     elevation: 12,
   },
-  wolfMoon: {
+  accentBrandLine: {
     color: colors.primary,
     fontFamily: fonts.montserratBold,
     fontSize: 11,
@@ -80,7 +77,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 30,
   },
-  trails: {
+  productNameLine: {
     color: colors.heading,
     fontFamily: fonts.montserratBlack,
     fontSize: 40,
@@ -96,45 +93,14 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     textAlign: 'center',
   },
-  loaderBlock: {
+  progressBlock: {
     alignItems: 'center',
     gap: 10,
   },
-  loadingText: {
+  statusMessage: {
     color: colors.textMuted,
     fontFamily: fonts.nunitoRegular,
     fontSize: 11,
     lineHeight: 16.5,
-  },
-  bottomFade: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  mountains: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: 180,
-  },
-  mountainBack: {
-    position: 'absolute',
-    left: -40,
-    right: -40,
-    bottom: 0,
-    height: 120,
-    backgroundColor: '#0A1020',
-    transform: [{skewX: '-12deg'}],
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 60,
-  },
-  mountainFront: {
-    position: 'absolute',
-    left: -20,
-    right: -20,
-    bottom: 0,
-    height: 90,
-    backgroundColor: colors.background,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 32,
   },
 });

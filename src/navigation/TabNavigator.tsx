@@ -15,11 +15,11 @@ import type {TabParamList} from './types';
 const Tab = createBottomTabNavigator<TabParamList>();
 
 const tabStacks = {
-  [Routes.tabs.overview]: OverviewStack,
-  [Routes.tabs.regions]: RegionsStack,
-  [Routes.tabs.sessions]: SessionsStack,
-  [Routes.tabs.library]: LibraryStack,
-  [Routes.tabs.shelf]: ShelfStack,
+  [Routes.tabs.explore]: OverviewStack,
+  [Routes.tabs.map]: RegionsStack,
+  [Routes.tabs.quiz]: SessionsStack,
+  [Routes.tabs.guide]: LibraryStack,
+  [Routes.tabs.saved]: ShelfStack,
 } as const;
 
 export function TabNavigator() {

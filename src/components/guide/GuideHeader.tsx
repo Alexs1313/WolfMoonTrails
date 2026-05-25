@@ -5,29 +5,29 @@ import {colors, fonts} from '../../consts';
 
 export function GuideHeader() {
   return (
-    <View style={styles.row}>
+    <View style={styles.headerRow}>
       <Image
-        source={require('../../../assets/images/tabs/library.png')}
-        style={styles.icon}
+        source={require('../../../assets/images/tabs/guide.png')}
+        style={styles.leadingGraphic}
         resizeMode="contain"
       />
-      <Text style={styles.title}>Field Guide</Text>
+      <Text style={styles.heading}>Field Guide</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  row: {
+  headerRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
   },
-  icon: {
+  leadingGraphic: {
     width: 22,
     height: 22,
     tintColor: colors.purple,
   },
-  title: {
+  heading: {
     color: colors.heading,
     fontFamily: fonts.montserratExtraBold,
     fontSize: 22,

@@ -15,68 +15,78 @@ import {PlaceTag} from './PlaceTag';
 
 type Props = {
   place: Place;
-  saved: boolean;
+  isBookmarked: boolean;
   onPress: () => void;
-  onToggleSave: () => void;
+  onToggleBookmark: () => void;
+  onShare: () => void;
 };
 
 export function PlaceListCard({
   place,
-  saved,
+  isBookmarked,
   onPress,
-  onToggleSave,
+  onToggleBookmark,
+  onShare,
 }: Props) {
   const category = getCategoryById(place.category);
-  const previewAnimals = place.animals.slice(0, 4);
+  const previewLabels = place.animals.slice(0, 4);
 
   return (
-    <View style={styles.card}>
-      <View style={styles.imageWrap}>
+    <View style={styles.panel}>
+      <View style={styles.mediaFrame}>
         <ImageBackground
           source={placeImages[place.imageKey]}
-          style={styles.image}
+          style={styles.media}
           resizeMode="cover">
           <LinearGradient
-            colors={['rgba(0,0,0,0)', colors.cardOverlayEnd]}
+            colors={['rgba(0,0,0,0)', colors.surfaceOverlayEnd]}
             locations={[0.4, 1]}
-            style={styles.imageGradient}
+            style={styles.mediaFade}
           />
-          <View style={[styles.categoryBadge, {backgroundColor: category.color}]}>
-            <Text style={styles.categoryText}>
+          <View
+            style={[styles.categoryChip, {backgroundColor: category.color}]}>
+            <Text style={styles.categoryLabel}>
               {category.label.toUpperCase()}
             </Text>
           </View>
           <Pressable
-            onPress={onToggleSave}
-            style={[styles.saveButton, saved && styles.saveButtonActive]}
+            onPress={onToggleBookmark}
+            style={[
+              styles.bookmarkControl,
+              isBookmarked && styles.bookmarkControlActive,
+            ]}
             hitSlop={8}>
-            <Text style={[styles.saveIcon, saved && styles.saveIconActive]}>
-              {saved ? '★' : '☆'}
+            <Text
+              style={[
+                styles.bookmarkGlyph,
+                isBookmarked && styles.bookmarkGlyphActive,
+              ]}>
+              {isBookmarked ? '★' : '☆'}
             </Text>
           </Pressable>
         </ImageBackground>
       </View>
 
-      <View style={styles.body}>
-        <Text style={styles.title}>{place.title}</Text>
+      <View style={styles.content}>
+        <Text style={styles.heading}>{place.title}</Text>
         <View style={styles.locationRow}>
-          <Text style={styles.pin}>◆</Text>
-          <Text style={styles.location}>{place.location}</Text>
+          <Text style={styles.locationGlyph}>◆</Text>
+          <Text style={styles.locationText}>{place.location}</Text>
         </View>
-        <Text style={styles.description} numberOfLines={2}>
+        <Text style={styles.summary} numberOfLines={2}>
           {place.shortDescription}
         </Text>
-        <View style={styles.tagsRow}>
-          {previewAnimals.map(animal => (
-            <PlaceTag key={animal} label={animal} />
+        <View style={styles.tagRow}>
+          {previewLabels.map(label => (
+            <PlaceTag key={label} label={label} />
           ))}
         </View>
-        <View style={styles.actions}>
-          <Pressable style={styles.shareButton}>
-            <Text style={styles.shareIcon}>↗</Text>
+        <View style={styles.actionRow}>
+          <Pressable style={styles.shareControl} onPress={onShare} hitSlop={6}>
+            <Text style={styles.shareGlyph}>↗</Text>
           </Pressable>
-          <Pressable style={styles.detailsButton} onPress={onPress}>
-            <Text style={styles.detailsText}>View Details →</Text>
+          <Pressable style={styles.detailsControl} onPress={onPress}>
+            <Text style={styles.detailsLabel}>View Details →</Text>
           </Pressable>
         </View>
       </View>
@@ -85,38 +95,38 @@ export function PlaceListCard({
 }
 
 const styles = StyleSheet.create({
-  card: {
+  panel: {
     backgroundColor: colors.surface,
     borderRadius: 18,
     borderWidth: 1,
     borderColor: colors.borderFaint,
     overflow: 'hidden',
   },
-  imageWrap: {
+  mediaFrame: {
     height: 170,
   },
-  image: {
+  media: {
     flex: 1,
     padding: 12,
     justifyContent: 'space-between',
   },
-  imageGradient: {
+  mediaFade: {
     ...StyleSheet.absoluteFillObject,
   },
-  categoryBadge: {
+  categoryChip: {
     alignSelf: 'flex-start',
     borderRadius: 20,
     paddingHorizontal: 10,
     paddingVertical: 8,
     zIndex: 1,
   },
-  categoryText: {
+  categoryLabel: {
     color: colors.text,
     fontFamily: fonts.montserratBold,
     fontSize: 9,
     letterSpacing: 1,
   },
-  saveButton: {
+  bookmarkControl: {
     position: 'absolute',
     top: 10,
     right: 12,
@@ -130,21 +140,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     zIndex: 1,
   },
-  saveButtonActive: {
+  bookmarkControlActive: {
     borderColor: colors.primary,
   },
-  saveIcon: {
+  bookmarkGlyph: {
     color: colors.textDim,
     fontSize: 16,
   },
-  saveIconActive: {
+  bookmarkGlyphActive: {
     color: colors.primary,
   },
-  body: {
+  content: {
     padding: 16,
     gap: 6,
   },
-  title: {
+  heading: {
     color: colors.heading,
     fontFamily: fonts.montserratBold,
     fontSize: 15,
@@ -154,34 +164,34 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 5,
   },
-  pin: {
+  locationGlyph: {
     color: colors.textDim,
     fontSize: 10,
   },
-  location: {
+  locationText: {
     color: colors.textDim,
     fontFamily: fonts.nunitoRegular,
     fontSize: 12,
   },
-  description: {
+  summary: {
     color: colors.textSecondary,
     fontFamily: fonts.nunitoRegular,
     fontSize: 12.5,
     lineHeight: 18.75,
     marginTop: 2,
   },
-  tagsRow: {
+  tagRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 6,
     marginTop: 6,
   },
-  actions: {
+  actionRow: {
     flexDirection: 'row',
     gap: 8,
     marginTop: 10,
   },
-  shareButton: {
+  shareControl: {
     width: 36,
     height: 36,
     borderRadius: 12,
@@ -191,11 +201,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  shareIcon: {
+  shareGlyph: {
     color: colors.textDim,
     fontSize: 15,
   },
-  detailsButton: {
+  detailsControl: {
     flex: 1,
     height: 36,
     borderRadius: 12,
@@ -203,7 +213,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  detailsText: {
+  detailsLabel: {
     color: colors.text,
     fontFamily: fonts.montserratBold,
     fontSize: 13,

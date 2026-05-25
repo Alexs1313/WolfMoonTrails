@@ -12,15 +12,17 @@ export function MapOverlayCard({place}: Props) {
   const category = getCategoryById(place.category);
 
   return (
-    <View style={styles.card}>
-      <Text style={styles.title} numberOfLines={1}>
+    <View style={styles.panel}>
+      <Text style={styles.heading} numberOfLines={1}>
         {place.title}
       </Text>
-      <Text style={styles.location} numberOfLines={1}>
+      <Text style={styles.locationText} numberOfLines={1}>
         {place.location}
       </Text>
       <View style={styles.categoryRow}>
-        <View style={[styles.categoryDot, {backgroundColor: category.color}]} />
+        <View
+          style={[styles.categorySwatch, {backgroundColor: category.color}]}
+        />
         <Text style={[styles.categoryLabel, {color: category.color}]}>
           {category.label.toUpperCase()}
         </Text>
@@ -30,7 +32,7 @@ export function MapOverlayCard({place}: Props) {
 }
 
 const styles = StyleSheet.create({
-  card: {
+  panel: {
     backgroundColor: 'rgba(15, 23, 41, 0.92)',
     borderWidth: 1,
     borderColor: colors.borderFaint,
@@ -39,12 +41,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     gap: 2,
   },
-  title: {
+  heading: {
     color: colors.heading,
     fontFamily: fonts.montserratBold,
     fontSize: 11,
   },
-  location: {
+  locationText: {
     color: colors.textDim,
     fontFamily: fonts.nunitoRegular,
     fontSize: 9,
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
     gap: 5,
     marginTop: 4,
   },
-  categoryDot: {
+  categorySwatch: {
     width: 6,
     height: 6,
     borderRadius: 2,

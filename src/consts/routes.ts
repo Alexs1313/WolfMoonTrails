@@ -1,14 +1,15 @@
 export const Routes = {
   root: {
+    loader: 'Loader',
     intro: 'Intro',
     main: 'Main',
   },
   tabs: {
-    overview: 'Overview',
-    regions: 'Regions',
-    sessions: 'Sessions',
-    library: 'Library',
-    shelf: 'Shelf',
+    explore: 'Explore',
+    map: 'Map',
+    quiz: 'Quiz',
+    guide: 'Guide',
+    saved: 'Saved',
   },
   overview: {
     main: 'OverviewMain',

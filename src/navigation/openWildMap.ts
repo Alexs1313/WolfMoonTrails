@@ -10,7 +10,7 @@ export function openPlaceOnWildMap(
   navigation: WildMapNavigation,
   placeId: string,
 ): void {
-  navigation.getParent()?.navigate(Routes.tabs.regions, {
+  navigation.getParent()?.navigate(Routes.tabs.map, {
     screen: Routes.regions.main,
     params: {placeId},
   });

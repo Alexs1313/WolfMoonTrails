@@ -522,7 +522,7 @@ export const places: Place[] = [
     shortDescription:
       'A classic raptor-watching sanctuary known for hawks, eagles, falcons, and seasonal migration counts.',
     fullDescription:
-      'Hawk Mountain Sanctuary is one of the strongest bird-of-prey destinations for the Sky Hunters category. Located along an important migration route in eastern Pennsylvania, it is known for lookout points where visitors can watch hawks, eagles, falcons, vultures, and other raptors moving across the ridgeline. The location works well for app content because it combines accessible trails, conservation history, scenic overlooks, and a clear wildlife focus. It should be presented as a respectful observation site where binoculars, patience, and quiet behavior matter.',
+      'Hawk Mountain Sanctuary is one of the strongest bird-of-prey destinations for the Sky Watchers category. Located along an important migration route in eastern Pennsylvania, it is known for lookout points where visitors can watch hawks, eagles, falcons, vultures, and other raptors moving across the ridgeline. The location works well for app content because it combines accessible trails, conservation history, scenic overlooks, and a clear wildlife focus. It should be presented as a respectful observation site where binoculars, patience, and quiet behavior matter.',
     address: '1700 Hawk Mountain Road, Kempton, PA 19529, USA',
     latitude: 40.6386,
     longitude: -75.9919,
@@ -555,7 +555,7 @@ export const places: Place[] = [
     shortDescription:
       'A coastal raptor migration viewpoint above the Golden Gate area.',
     fullDescription:
-      'Hawk Hill is a scenic raptor-watching location in the Marin Headlands, within Golden Gate National Recreation Area. It is known for autumn migration, when hawks, falcons, eagles, vultures, osprey, and other birds of prey move through the coastal flyway. For the app, this location gives the Sky Hunters category a strong coastal identity: ocean air, cliffs, Golden Gate views, blue sky, and birds crossing the headlands.',
+      'Hawk Hill is a scenic raptor-watching location in the Marin Headlands, within Golden Gate National Recreation Area. It is known for autumn migration, when hawks, falcons, eagles, vultures, osprey, and other birds of prey move through the coastal flyway. For the app, this location gives the Sky Watchers category a strong coastal identity: ocean air, cliffs, Golden Gate views, blue sky, and birds crossing the headlands.',
     address:
       'Hawk Hill, Conzelman Road, Marin Headlands, Golden Gate National Recreation Area, Sausalito, CA, USA',
     latitude: 37.8277,
@@ -589,7 +589,7 @@ export const places: Place[] = [
     shortDescription:
       'A major European bird migration point, especially strong during autumn raptor movement.',
     fullDescription:
-      'Falsterbo Bird Observatory is one of Europe’s most important migration-monitoring areas. The Falsterbo peninsula acts like a natural funnel for migrating birds moving south and southwest, making it especially valuable for watching raptors during the autumn season. This location fits the Sky Hunters category because it feels scientific, coastal, and atmospheric at the same time. The observatory’s migration monitoring includes standardized counts, and raptors are counted as long as significant migration continues during the day.',
+      'Falsterbo Bird Observatory is one of Europe’s most important migration-monitoring areas. The Falsterbo peninsula acts like a natural funnel for migrating birds moving south and southwest, making it especially valuable for watching raptors during the autumn season. This location fits the Sky Watchers category because it feels scientific, coastal, and atmospheric at the same time. The observatory’s migration monitoring includes standardized counts, and raptors are counted as long as significant migration continues during the day.',
     address: 'Falsterbo Bird Observatory, Falsterbo, Skåne County, Sweden',
     latitude: 55.3833,
     longitude: 12.8167,
@@ -623,7 +623,7 @@ export const places: Place[] = [
     shortDescription:
       'A secondary Falsterbo observation area for watching migrating birds and raptors near the coast.',
     fullDescription:
-      'South Flommen is a useful additional birdwatching zone on the Falsterbo peninsula. It can be presented in the app as a quieter observation area near coastal terrain, golf-course edges, beach paths, and open sky. This location is especially relevant when wind conditions shift bird movement across the peninsula. Falsterbo Bird Observatory notes that suitable observation spots may change depending on wind drift, which makes South Flommen a logical secondary Sky Hunters location rather than just a duplicate of the main observatory.',
+      'South Flommen is a useful additional birdwatching zone on the Falsterbo peninsula. It can be presented in the app as a quieter observation area near coastal terrain, golf-course edges, beach paths, and open sky. This location is especially relevant when wind conditions shift bird movement across the peninsula. Falsterbo Bird Observatory notes that suitable observation spots may change depending on wind drift, which makes South Flommen a logical secondary Sky Watchers location rather than just a duplicate of the main observatory.',
     address: 'South Flommen, Falsterbo, Skåne County, Sweden',
     latitude: 55.388,
     longitude: 12.822,
@@ -656,7 +656,7 @@ export const places: Place[] = [
     shortDescription:
       'A desert raptor landscape with cliffs, canyons, open sky, eagles, and peregrine falcons.',
     fullDescription:
-      'Capitol Reef Country brings a different visual mood to the Sky Hunters category: red cliffs, desert canyons, open air, and wide skies. It is a strong location for spotting birds in dramatic terrain, especially around Capitol Reef National Park and nearby scenic areas. More than 230 bird species have been documented in Capitol Reef National Park, and birding locations include the Fruita area, Fremont River Trail, Ripple Rock Nature Center area, picnic zones, and riparian vegetation along Sulphur Creek. Raptors such as peregrine falcons and golden eagles may be seen in the wider cliff and desert landscape, though sightings are never guaranteed.',
+      'Capitol Reef Country brings a different visual mood to the Sky Watchers category: red cliffs, desert canyons, open air, and wide skies. It is a strong location for spotting birds in dramatic terrain, especially around Capitol Reef National Park and nearby scenic areas. More than 230 bird species have been documented in Capitol Reef National Park, and birding locations include the Fruita area, Fremont River Trail, Ripple Rock Nature Center area, picnic zones, and riparian vegetation along Sulphur Creek. Raptors such as peregrine falcons and golden eagles may be seen in the wider cliff and desert landscape, though sightings are never guaranteed.',
     address:
       'Capitol Reef National Park / Capitol Reef Country, Torrey, UT 84775, USA',
     latitude: 38.2919,
