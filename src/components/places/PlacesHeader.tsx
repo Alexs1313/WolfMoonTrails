@@ -27,7 +27,7 @@ export function PlacesHeader() {
             style={styles.brandMark}
             resizeMode="contain"
           />
-          <Text style={styles.heading}>Wild Moon Trails</Text>
+          <Text style={styles.heading}>Wild Mood Trails</Text>
         </View>
       </View>
       <View style={styles.profileFrame}>

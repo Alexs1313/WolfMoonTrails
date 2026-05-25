@@ -1,6 +1,8 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+
+const usesGoogleMaps = Platform.OS === 'android';
 
 import {colors} from '../../consts';
 import {darkMapStyle} from '../../consts/mapStyle';
@@ -94,10 +96,11 @@ export function WildMapView({places, selectedId, onSelect}: Props) {
     <View style={styles.mapFrame}>
       <MapView
         ref={mapRef}
-        provider={PROVIDER_GOOGLE}
+        provider={usesGoogleMaps ? PROVIDER_GOOGLE : undefined}
         style={styles.map}
         initialRegion={initialRegion}
-        customMapStyle={darkMapStyle}
+        customMapStyle={usesGoogleMaps ? darkMapStyle : undefined}
+        mapType={usesGoogleMaps ? 'standard' : 'mutedStandard'}
         userInterfaceStyle="dark"
         showsCompass={false}
         showsMyLocationButton={false}
