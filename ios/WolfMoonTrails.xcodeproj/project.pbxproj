@@ -353,7 +353,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ddrkjsa.fhascbki;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbvmcmnxc.jsadn;
 				PRODUCT_NAME = WolfMoonTrails;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -385,7 +385,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ddrkjsa.fhascbki;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbvmcmnxc.jsadn;
 				PRODUCT_NAME = WolfMoonTrails;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

@@ -1,20 +1,20 @@
 workflows:
   ios-workflow:
-    name: 'Wild Mood Trails'
+    name: 'Wolf Moon Trails'
     max_build_duration: 120
     instance_type: mac_mini_m2
     integrations:
-      app_store_connect: MoodTrailsAPIKey
+      app_store_connect: MoonTrailsAPIKey
     environment:
       xcode: '26.0'
       ios_signing:
         distribution_type: app_store
-        bundle_identifier: com.ddrkjsa.fhascbki
+        bundle_identifier: com.nbvmcmnxc.jsadn
       vars:
-        BUNDLE_ID: com.ddrkjsa.fhascbki
+        BUNDLE_ID: com.nbvmcmnxc.jsadn
         XCODE_WORKSPACE: WolfMoonTrails.xcworkspace
         XCODE_SCHEME: WolfMoonTrails
-        APP_STORE_APPLE_ID: 6773017942
+        APP_STORE_APPLE_ID: 6773707917
     scripts:
       - name: Install npm dependencies
         script: |
