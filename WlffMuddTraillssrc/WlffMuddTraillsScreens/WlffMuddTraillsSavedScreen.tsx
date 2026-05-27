@@ -389,7 +389,7 @@ const styles = StyleSheet.create({
   wlffMuddTraillsSavedEmptyStateCtaLabel: {
     color: '#FFFFFF',
     fontFamily: 'Montserrat-Bold',
-    fontSize: 14,
+    fontSize: 14.3,
     lineHeight: 21,
   },
   wlffMuddTraillsSavedSpotCardPanel: {
