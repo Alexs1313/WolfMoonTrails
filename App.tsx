@@ -1,9 +1,13 @@
 import React from 'react';
+import {WiildMoodtrailssRootNavigator} from './WiildMoodtrailssRootNavigator';
+import {AppProvider} from './WilldmoodTralls/app/AppProvider';
 
-import {WlffMuddTraillsRootNavigator} from './WlffMuddTraillssrc/WlffMuddTraillsRoutes/WlffMuddTraillsIndex';
-
-function WlffMuddTraillsApp(): React.JSX.Element {
-  return <WlffMuddTraillsRootNavigator />;
+function WiildMoodtrailssApp(): React.JSX.Element {
+  return (
+    <AppProvider>
+      <WiildMoodtrailssRootNavigator />
+    </AppProvider>
+  );
 }
 
-export default WlffMuddTraillsApp;
+export default WiildMoodtrailssApp;

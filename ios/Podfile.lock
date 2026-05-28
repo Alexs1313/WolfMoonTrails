@@ -7,13 +7,6 @@ PODS:
   - FBLazyVector (0.78.1)
   - fmt (11.0.2)
   - glog (0.3.5)
-  - Google-Maps-iOS-Utils (5.0.0):
-    - GoogleMaps (~> 8.0)
-  - GoogleMaps (8.4.0):
-    - GoogleMaps/Maps (= 8.4.0)
-  - GoogleMaps/Base (8.4.0)
-  - GoogleMaps/Maps (8.4.0):
-    - GoogleMaps/Base
   - hermes-engine (0.78.1):
     - hermes-engine/Pre-built (= 0.78.1)
   - hermes-engine/Pre-built (0.78.1)
@@ -1247,10 +1240,6 @@ PODS:
     - React-jsiexecutor
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
-  - react-native-google-maps (1.20.1):
-    - Google-Maps-iOS-Utils (= 5.0.0)
-    - GoogleMaps (= 8.4.0)
-    - React-Core
   - react-native-maps (1.20.1):
     - React-Core
   - react-native-orientation-locker (1.7.0):
@@ -1671,6 +1660,125 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNReanimated (3.19.5):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - RNReanimated/reanimated (= 3.19.5)
+    - RNReanimated/worklets (= 3.19.5)
+    - Yoga
+  - RNReanimated/reanimated (3.19.5):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - RNReanimated/reanimated/apple (= 3.19.5)
+    - Yoga
+  - RNReanimated/reanimated/apple (3.19.5):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
+  - RNReanimated/worklets (3.19.5):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - RNReanimated/worklets/apple (= 3.19.5)
+    - Yoga
+  - RNReanimated/worklets/apple (3.19.5):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RNScreens (4.9.1):
     - DoubleConversion
     - glog
@@ -1760,7 +1868,6 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
-  - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-orientation-locker (from `../node_modules/react-native-orientation-locker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -1795,13 +1902,12 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   trunk:
-    - Google-Maps-iOS-Utils
-    - GoogleMaps
     - SocketRocket
 
 EXTERNAL SOURCES:
@@ -1882,8 +1988,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
-  react-native-google-maps:
-    :path: "../node_modules/react-native-maps"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
   react-native-orientation-locker:
@@ -1952,6 +2056,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNReanimated:
+    :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   Yoga:
@@ -1965,8 +2071,6 @@ SPEC CHECKSUMS:
   FBLazyVector: bba368dacede4c9dec7a58c9be5a2d3e9ea30cc7
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
   glog: eb93e2f488219332457c3c4eafd2738ddc7e80b8
-  Google-Maps-iOS-Utils: 66d6de12be1ce6d3742a54661e7a79cb317a9321
-  GoogleMaps: 8939898920281c649150e0af74aa291c60f2e77d
   hermes-engine: f493b0a600aed5dc06532141603688a30a5b2f61
   RCT-Folly: 36fe2295e44b10d831836cc0d1daec5f8abcf809
   RCTDeprecation: 082fbc90409015eac1366795a0b90f8b5cb28efe
@@ -1998,7 +2102,6 @@ SPEC CHECKSUMS:
   React-logger: 74ddb793d36b48bba176328c7af75e5e656fd405
   React-Mapbuffer: 39e87693178fd6483bb5ca8b851fae362d49409a
   React-microtasksnativemodule: b740ebae7fad70aa78bc24cc0dfc15ac9637b6eb
-  react-native-google-maps: c4f5c5b2dda17e7cb2cb2b37a81f140b039b3e7e
   react-native-maps: 9febd31278b35cd21e4fad2cf6fa708993be5dab
   react-native-orientation-locker: cc6f357b289a2e0dd2210fea0c52cb8e0727fdaa
   react-native-safe-area-context: afcc2e2b3e78ae8ef90d81e658aacee34ebc27ea
@@ -2033,10 +2136,11 @@ SPEC CHECKSUMS:
   ReactCommon: 269d0d36423fad044eaea49900e88684ac670a16
   RNCAsyncStorage: 6c619a6d28e188d33efbd39df77a2c3933d9ca72
   RNGestureHandler: 8b1080a6db0be82dbca18550d6212b885bfab6b2
+  RNReanimated: 8a4395d43e799425e72de66c78dd0f068c36948f
   RNScreens: 0d4cb9afe052607ad0aa71f645a88bb7c7f2e64c
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: b94ff2d7559cb66837c97a3f394ddb817faad4d6
 
-PODFILE CHECKSUM: 42c37991be4485e6c0b3dfb3b229545c63f17047
+PODFILE CHECKSUM: 6cd91d88b94685d91bce0d9a97bb2892d98d72a3
 
 COCOAPODS: 1.16.2

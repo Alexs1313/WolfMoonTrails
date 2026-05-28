@@ -4,10 +4,10 @@
 
 import React from 'react';
 import ReactTestRenderer from 'react-test-renderer';
-import WlffMuddTraillsApp from '../App';
+import WiildMoodtrailssApp from '../App';
 
 test('renders correctly', async () => {
   await ReactTestRenderer.act(() => {
-    ReactTestRenderer.create(<WlffMuddTraillsApp />);
+    ReactTestRenderer.create(<WiildMoodtrailssApp />);
   });
 });
