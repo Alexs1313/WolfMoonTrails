@@ -57,10 +57,7 @@ type QuizStarsProps = {
   max?: number;
 };
 
-function QuizStars({
-  count,
-  max = 3,
-}: QuizStarsProps) {
+function QuizStars({count, max = 3}: QuizStarsProps) {
   return (
     <View style={styles.wiildMoodtrailssQuizStarsRatingRow}>
       {Array.from({length: max}).map((_, index) => (
@@ -89,10 +86,7 @@ export function WiildMoodtrailssSessionsScreen({
 }: WiildMoodtrailssSessionsScreenProps) {
   const handleStart = useCallback(async () => {
     const progress = await WiildMoodtrailssGetQuizProgress();
-    const levelId = WiildMoodtrailssGetCurrentLevelId(
-      progress,
-      QuizLevels,
-    );
+    const levelId = WiildMoodtrailssGetCurrentLevelId(progress, QuizLevels);
     if (!levelId) {
       return;
     }
@@ -100,53 +94,57 @@ export function WiildMoodtrailssSessionsScreen({
   }, [navigation]);
 
   return (
-    <View
-      style={[
-        styles.wiildMoodtrailssSessionsScreenScreenLayout,
-        {
-          paddingTop: SESSIONS_TOP_PADDING,
-          paddingBottom: PAGE_BOTTOM_PADDING,
-        },
-      ]}>
-      <View style={styles.wiildMoodtrailssSessionsScreenHeaderBlock}>
-        <View style={styles.wiildMoodtrailssSessionsScreenHeadingRow}>
-          <Text style={styles.wiildMoodtrailssSessionsScreenAccentGlyph}>
-            ⚡
-          </Text>
-          <Text style={styles.wiildMoodtrailssSessionsScreenHeading}>
-            Wildlife Quiz
+    <ScrollView
+      contentContainerStyle={{flexGrow: 1}}
+      showsVerticalScrollIndicator={false}>
+      <View
+        style={[
+          styles.wiildMoodtrailssSessionsScreenScreenLayout,
+          {
+            paddingTop: SESSIONS_TOP_PADDING,
+            paddingBottom: PAGE_BOTTOM_PADDING,
+          },
+        ]}>
+        <View style={styles.wiildMoodtrailssSessionsScreenHeaderBlock}>
+          <View style={styles.wiildMoodtrailssSessionsScreenHeadingRow}>
+            <Text style={styles.wiildMoodtrailssSessionsScreenAccentGlyph}>
+              ⚡
+            </Text>
+            <Text style={styles.wiildMoodtrailssSessionsScreenHeading}>
+              Wildlife Quiz
+            </Text>
+          </View>
+          <Text style={styles.wiildMoodtrailssSessionsScreenDescription}>
+            Test your wilderness knowledge across multiple levels
           </Text>
         </View>
-        <Text style={styles.wiildMoodtrailssSessionsScreenDescription}>
-          Test your wilderness knowledge across multiple levels
-        </Text>
-      </View>
 
-      <View style={styles.wiildMoodtrailssSessionsScreenIllustrationFrame}>
-        <Image
-          source={require('../../assets/images/wiild-moodtrailss-wildlife-quiz-hero.png')}
-          style={styles.wiildMoodtrailssSessionsScreenIllustration}
-          resizeMode="contain"
-        />
-      </View>
+        <View style={styles.wiildMoodtrailssSessionsScreenIllustrationFrame}>
+          <Image
+            source={require('../../assets/images/wiild-moodtrailss-wildlife-quiz-hero.png')}
+            style={styles.wiildMoodtrailssSessionsScreenIllustration}
+            resizeMode="contain"
+          />
+        </View>
 
-      <View style={styles.wiildMoodtrailssSessionsScreenIntroPanel}>
-        <Text style={styles.wiildMoodtrailssSessionsScreenIntroHeading}>
-          Before You Enter the Wild
-        </Text>
-        <Text style={styles.wiildMoodtrailssSessionsScreenIntroCopy}>
-          Learn how to stay calm, keep distance, and make smart decisions around
-          wolves, bears, and other wildlife.
-        </Text>
-        <Pressable
-          style={styles.wiildMoodtrailssSessionsScreenStartButton}
-          onPress={handleStart}>
-          <Text style={styles.wiildMoodtrailssSessionsScreenStartButtonText}>
-            Start Safety Quiz
+        <View style={styles.wiildMoodtrailssSessionsScreenIntroPanel}>
+          <Text style={styles.wiildMoodtrailssSessionsScreenIntroHeading}>
+            Before You Enter the Wild
           </Text>
-        </Pressable>
+          <Text style={styles.wiildMoodtrailssSessionsScreenIntroCopy}>
+            Learn how to stay calm, keep distance, and make smart decisions
+            around wolves, bears, and other wildlife.
+          </Text>
+          <Pressable
+            style={styles.wiildMoodtrailssSessionsScreenStartButton}
+            onPress={handleStart}>
+            <Text style={styles.wiildMoodtrailssSessionsScreenStartButtonText}>
+              Start Safety Quiz
+            </Text>
+          </Pressable>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -167,8 +165,7 @@ export function WiildMoodtrailssQuizPlayScreen({
   const correctCount = useAppSelector(state => state.ui.quiz.correctCount);
   const selectedId = useAppSelector(state => state.ui.quiz.selectedOptionId);
 
-  const question: QuizQuestion | undefined =
-    level?.questions[questionIndex];
+  const question: QuizQuestion | undefined = level?.questions[questionIndex];
   const total = level?.questions.length ?? 0;
   const answered = selectedId !== null;
 
@@ -244,140 +241,147 @@ export function WiildMoodtrailssQuizPlayScreen({
   const isCorrect = selectedOption?.correct ?? false;
 
   return (
-    <View
-      style={[
-        styles.wiildMoodtrailssQuizPlayScreenScreenLayout,
-        {paddingTop: QUIZ_TOP_PADDING},
-      ]}>
-      <View style={styles.wiildMoodtrailssQuizPlayScreenTopBar}>
-        <Pressable
-          onPress={() => navigation.goBack()}
-          style={styles.wiildMoodtrailssQuizPlayScreenNavigationControl}>
-          <Text style={styles.wiildMoodtrailssQuizPlayScreenNavigationGlyph}>
-            ←
-          </Text>
-        </Pressable>
-        <View style={styles.wiildMoodtrailssQuizPlayScreenTopBarCenter}>
-          <Text style={styles.wiildMoodtrailssQuizPlayScreenBolt}>⚡</Text>
-          <Text style={styles.wiildMoodtrailssQuizPlayScreenScreenHeading}>
-            {level.title}
-          </Text>
-        </View>
-        <Text style={styles.wiildMoodtrailssQuizPlayScreenCounter}>
-          {questionIndex + 1}/{total}
-        </Text>
-      </View>
-
-      <View style={styles.wiildMoodtrailssQuizPlayScreenProgressTrack}>
-        <View
-          style={[
-            styles.wiildMoodtrailssQuizPlayScreenProgressFill,
-            {width: `${progress * 100}%`},
-          ]}
-        />
-      </View>
-
-      <ScrollView
-        style={styles.wiildMoodtrailssQuizPlayScreenScroll}
-        contentContainerStyle={[
-          styles.wiildMoodtrailssQuizPlayScreenScrollContent,
-          {paddingBottom: spacing.lg + 24},
-        ]}
-        showsVerticalScrollIndicator={false}>
-        <View style={styles.wiildMoodtrailssQuizPlayScreenPromptPanel}>
-          <View style={styles.wiildMoodtrailssQuizPlayScreenQuestionIcon}>
-            <Text style={styles.wiildMoodtrailssQuizPlayScreenQuestionBolt}>
-              ⚡
-            </Text>
-          </View>
-          <Text style={styles.wiildMoodtrailssQuizPlayScreenQuestionText}>
-            {question.text}
-          </Text>
-        </View>
-
-        <View style={styles.wiildMoodtrailssQuizPlayScreenOptions}>
-          {question.options.map((option, index) => {
-            const isSelected = selectedId === option.id;
-            const showCorrect = answered && option.correct;
-            const showWrong = answered && isSelected && !option.correct;
-
-            return (
-              <Pressable
-                key={option.id}
-                onPress={() => handleSelect(option)}
-                disabled={answered}
-                style={[
-                  styles.wiildMoodtrailssQuizPlayScreenOption,
-                  showCorrect &&
-                    styles.wiildMoodtrailssQuizPlayScreenOptionCorrect,
-                  showWrong && styles.wiildMoodtrailssQuizPlayScreenOptionWrong,
-                ]}>
-                <View
-                  style={[
-                    styles.wiildMoodtrailssQuizPlayScreenOptionBadge,
-                    showCorrect &&
-                      styles.wiildMoodtrailssQuizPlayScreenOptionBadgeCorrect,
-                    showWrong &&
-                      styles.wiildMoodtrailssQuizPlayScreenOptionBadgeWrong,
-                  ]}>
-                  <Text
-                    style={[
-                      styles.wiildMoodtrailssQuizPlayScreenOptionBadgeText,
-                      (showCorrect || showWrong) &&
-                        styles.wiildMoodtrailssQuizPlayScreenOptionBadgeTextActive,
-                    ]}>
-                    {showCorrect ? '✓' : OPTION_LABELS[index]}
-                  </Text>
-                </View>
-                <Text
-                  style={[
-                    styles.wiildMoodtrailssQuizPlayScreenOptionText,
-                    showCorrect &&
-                      styles.wiildMoodtrailssQuizPlayScreenOptionTextCorrect,
-                    showWrong &&
-                      styles.wiildMoodtrailssQuizPlayScreenOptionTextWrong,
-                  ]}>
-                  {option.text}
-                </Text>
-              </Pressable>
-            );
-          })}
-        </View>
-
-        {answered && (
-          <View
-            style={[
-              styles.wiildMoodtrailssQuizPlayScreenFeedback,
-              isCorrect
-                ? styles.wiildMoodtrailssQuizPlayScreenFeedbackCorrect
-                : styles.wiildMoodtrailssQuizPlayScreenFeedbackWrong,
-            ]}>
-            <Text
-              style={[
-                styles.wiildMoodtrailssQuizPlayScreenFeedbackTitle,
-                isCorrect
-                  ? styles.wiildMoodtrailssQuizPlayScreenFeedbackTitleCorrect
-                  : styles.wiildMoodtrailssQuizPlayScreenFeedbackTitleWrong,
-              ]}>
-              {isCorrect ? '✓ CORRECT!' : '✕ INCORRECT'}
-            </Text>
-            <Text style={styles.wiildMoodtrailssQuizPlayScreenFeedbackBody}>
-              {question.explanation}
-            </Text>
-          </View>
-        )}
-
-        {answered && (
+    <ScrollView
+      contentContainerStyle={{flexGrow: 1}}
+      showsVerticalScrollIndicator={false}>
+      <View
+        style={[
+          styles.wiildMoodtrailssQuizPlayScreenScreenLayout,
+          {paddingTop: QUIZ_TOP_PADDING},
+        ]}>
+        <View style={styles.wiildMoodtrailssQuizPlayScreenTopBar}>
           <Pressable
-            style={styles.wiildMoodtrailssQuizPlayScreenNextButton}
-            onPress={handleNext}>
-            <Text style={styles.wiildMoodtrailssQuizPlayScreenNextButtonText}>
-              {questionIndex >= total - 1 ? 'See Results →' : 'Next Question →'}
+            onPress={() => navigation.goBack()}
+            style={styles.wiildMoodtrailssQuizPlayScreenNavigationControl}>
+            <Text style={styles.wiildMoodtrailssQuizPlayScreenNavigationGlyph}>
+              ←
             </Text>
           </Pressable>
-        )}
-      </ScrollView>
-    </View>
+          <View style={styles.wiildMoodtrailssQuizPlayScreenTopBarCenter}>
+            <Text style={styles.wiildMoodtrailssQuizPlayScreenBolt}>⚡</Text>
+            <Text style={styles.wiildMoodtrailssQuizPlayScreenScreenHeading}>
+              {level.title}
+            </Text>
+          </View>
+          <Text style={styles.wiildMoodtrailssQuizPlayScreenCounter}>
+            {questionIndex + 1}/{total}
+          </Text>
+        </View>
+
+        <View style={styles.wiildMoodtrailssQuizPlayScreenProgressTrack}>
+          <View
+            style={[
+              styles.wiildMoodtrailssQuizPlayScreenProgressFill,
+              {width: `${progress * 100}%`},
+            ]}
+          />
+        </View>
+
+        <ScrollView
+          style={styles.wiildMoodtrailssQuizPlayScreenScroll}
+          contentContainerStyle={[
+            styles.wiildMoodtrailssQuizPlayScreenScrollContent,
+            {paddingBottom: spacing.lg + 24},
+          ]}
+          showsVerticalScrollIndicator={false}>
+          <View style={styles.wiildMoodtrailssQuizPlayScreenPromptPanel}>
+            <View style={styles.wiildMoodtrailssQuizPlayScreenQuestionIcon}>
+              <Text style={styles.wiildMoodtrailssQuizPlayScreenQuestionBolt}>
+                ⚡
+              </Text>
+            </View>
+            <Text style={styles.wiildMoodtrailssQuizPlayScreenQuestionText}>
+              {question.text}
+            </Text>
+          </View>
+
+          <View style={styles.wiildMoodtrailssQuizPlayScreenOptions}>
+            {question.options.map((option, index) => {
+              const isSelected = selectedId === option.id;
+              const showCorrect = answered && option.correct;
+              const showWrong = answered && isSelected && !option.correct;
+
+              return (
+                <Pressable
+                  key={option.id}
+                  onPress={() => handleSelect(option)}
+                  disabled={answered}
+                  style={[
+                    styles.wiildMoodtrailssQuizPlayScreenOption,
+                    showCorrect &&
+                      styles.wiildMoodtrailssQuizPlayScreenOptionCorrect,
+                    showWrong &&
+                      styles.wiildMoodtrailssQuizPlayScreenOptionWrong,
+                  ]}>
+                  <View
+                    style={[
+                      styles.wiildMoodtrailssQuizPlayScreenOptionBadge,
+                      showCorrect &&
+                        styles.wiildMoodtrailssQuizPlayScreenOptionBadgeCorrect,
+                      showWrong &&
+                        styles.wiildMoodtrailssQuizPlayScreenOptionBadgeWrong,
+                    ]}>
+                    <Text
+                      style={[
+                        styles.wiildMoodtrailssQuizPlayScreenOptionBadgeText,
+                        (showCorrect || showWrong) &&
+                          styles.wiildMoodtrailssQuizPlayScreenOptionBadgeTextActive,
+                      ]}>
+                      {showCorrect ? '✓' : OPTION_LABELS[index]}
+                    </Text>
+                  </View>
+                  <Text
+                    style={[
+                      styles.wiildMoodtrailssQuizPlayScreenOptionText,
+                      showCorrect &&
+                        styles.wiildMoodtrailssQuizPlayScreenOptionTextCorrect,
+                      showWrong &&
+                        styles.wiildMoodtrailssQuizPlayScreenOptionTextWrong,
+                    ]}>
+                    {option.text}
+                  </Text>
+                </Pressable>
+              );
+            })}
+          </View>
+
+          {answered && (
+            <View
+              style={[
+                styles.wiildMoodtrailssQuizPlayScreenFeedback,
+                isCorrect
+                  ? styles.wiildMoodtrailssQuizPlayScreenFeedbackCorrect
+                  : styles.wiildMoodtrailssQuizPlayScreenFeedbackWrong,
+              ]}>
+              <Text
+                style={[
+                  styles.wiildMoodtrailssQuizPlayScreenFeedbackTitle,
+                  isCorrect
+                    ? styles.wiildMoodtrailssQuizPlayScreenFeedbackTitleCorrect
+                    : styles.wiildMoodtrailssQuizPlayScreenFeedbackTitleWrong,
+                ]}>
+                {isCorrect ? '✓ CORRECT!' : '✕ INCORRECT'}
+              </Text>
+              <Text style={styles.wiildMoodtrailssQuizPlayScreenFeedbackBody}>
+                {question.explanation}
+              </Text>
+            </View>
+          )}
+
+          {answered && (
+            <Pressable
+              style={styles.wiildMoodtrailssQuizPlayScreenNextButton}
+              onPress={handleNext}>
+              <Text style={styles.wiildMoodtrailssQuizPlayScreenNextButtonText}>
+                {questionIndex >= total - 1
+                  ? 'See Results →'
+                  : 'Next Question →'}
+              </Text>
+            </Pressable>
+          )}
+        </ScrollView>
+      </View>
+    </ScrollView>
   );
 }
 
@@ -423,56 +427,61 @@ export function WiildMoodtrailssQuizResultScreen({
   }
 
   return (
-    <View
-      style={[
-        styles.wiildMoodtrailssQuizResultScreenScreenLayout,
-        {
-          paddingTop: QUIZ_TOP_PADDING,
-          paddingBottom: PAGE_BOTTOM_PADDING,
-        },
-      ]}>
-      <View style={styles.wiildMoodtrailssQuizResultScreenContentColumn}>
-        <View style={styles.wiildMoodtrailssQuizResultScreenBadgeFrame}>
-          <Text style={styles.wiildMoodtrailssQuizResultScreenBadgeGlyph}>
-            🏆
-          </Text>
-        </View>
-        <Text style={styles.wiildMoodtrailssQuizResultScreenHeading}>
-          Level Complete!
-        </Text>
-        <Text style={styles.wiildMoodtrailssQuizResultScreenLevelLabel}>
-          {level.title}
-        </Text>
-        <QuizStars count={stars} />
-        <View style={styles.wiildMoodtrailssQuizResultScreenResultPanel}>
-          <Text style={styles.wiildMoodtrailssQuizResultScreenResultValue}>
-            {correctCount}/{total}
-          </Text>
-          <Text style={styles.wiildMoodtrailssQuizResultScreenResultCaption}>
-            Questions answered correctly
-          </Text>
-        </View>
-        <View style={styles.wiildMoodtrailssQuizResultScreenActionRow}>
-          <Pressable
-            style={styles.wiildMoodtrailssQuizResultScreenRetryControl}
-            onPress={handleRetry}>
-            <Text style={styles.wiildMoodtrailssQuizResultScreenRetryGlyph}>
-              ↻
+    <ScrollView
+      contentContainerStyle={{flexGrow: 1}}
+      showsVerticalScrollIndicator={false}>
+      <View
+        style={[
+          styles.wiildMoodtrailssQuizResultScreenScreenLayout,
+          {
+            paddingTop: QUIZ_TOP_PADDING,
+            paddingBottom: PAGE_BOTTOM_PADDING,
+          },
+        ]}>
+        <View style={styles.wiildMoodtrailssQuizResultScreenContentColumn}>
+          <View style={styles.wiildMoodtrailssQuizResultScreenBadgeFrame}>
+            <Text style={styles.wiildMoodtrailssQuizResultScreenBadgeGlyph}>
+              🏆
             </Text>
-            <Text style={styles.wiildMoodtrailssQuizResultScreenRetryLabel}>
-              Retry
+          </View>
+          <Text style={styles.wiildMoodtrailssQuizResultScreenHeading}>
+            Level Complete!
+          </Text>
+          <Text style={styles.wiildMoodtrailssQuizResultScreenLevelLabel}>
+            {level.title}
+          </Text>
+          <QuizStars count={stars} />
+          <View style={styles.wiildMoodtrailssQuizResultScreenResultPanel}>
+            <Text style={styles.wiildMoodtrailssQuizResultScreenResultValue}>
+              {correctCount}/{total}
             </Text>
-          </Pressable>
-          <Pressable
-            style={styles.wiildMoodtrailssQuizResultScreenContinueControl}
-            onPress={nextLevelId ? handleNext : handleDone}>
-            <Text style={styles.wiildMoodtrailssQuizResultScreenContinueLabel}>
-              {nextLevelId ? 'Next Level →' : 'Done'}
+            <Text style={styles.wiildMoodtrailssQuizResultScreenResultCaption}>
+              Questions answered correctly
             </Text>
-          </Pressable>
+          </View>
+          <View style={styles.wiildMoodtrailssQuizResultScreenActionRow}>
+            <Pressable
+              style={styles.wiildMoodtrailssQuizResultScreenRetryControl}
+              onPress={handleRetry}>
+              <Text style={styles.wiildMoodtrailssQuizResultScreenRetryGlyph}>
+                ↻
+              </Text>
+              <Text style={styles.wiildMoodtrailssQuizResultScreenRetryLabel}>
+                Retry
+              </Text>
+            </Pressable>
+            <Pressable
+              style={styles.wiildMoodtrailssQuizResultScreenContinueControl}
+              onPress={nextLevelId ? handleNext : handleDone}>
+              <Text
+                style={styles.wiildMoodtrailssQuizResultScreenContinueLabel}>
+                {nextLevelId ? 'Next Level →' : 'Done'}
+              </Text>
+            </Pressable>
+          </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
