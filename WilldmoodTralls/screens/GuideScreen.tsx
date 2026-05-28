@@ -2,6 +2,7 @@ import React, {useCallback, useState} from 'react';
 import {
   Image,
   ImageBackground,
+  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -43,7 +44,7 @@ const WiildMoodtrailssSpacing = {
 
 const PAGE_BOTTOM_PADDING = 80;
 const LIBRARY_TOP_PADDING = 45;
-const DETAIL_NAV_TOP_PADDING = 24;
+const DETAIL_NAV_TOP_PADDING = 54;
 
 function WiildMoodtrailssLibrarySeparator() {
   return <View style={styles.wiildMoodtrailssLibraryScreenSeparator} />;
@@ -399,14 +400,16 @@ export function WiildMoodtrailssAnimalDetailScreen({
                   styles.wiildMoodtrailssAnimalDetailScreenNavigationControl
                 }>
                 <Text
-                  style={
-                    styles.wiildMoodtrailssAnimalDetailScreenNavigationGlyph
-                  }>
+                  style={[
+                    styles.wiildMoodtrailssAnimalDetailScreenNavigationGlyph,
+                    Platform.OS === 'android' && {bottom: 4},
+                  ]}>
                   ←
                 </Text>
               </Pressable>
             </View>
-            <View style={styles.wiildMoodtrailssAnimalDetailScreenBannerCaption}>
+            <View
+              style={styles.wiildMoodtrailssAnimalDetailScreenBannerCaption}>
               <Text
                 style={styles.wiildMoodtrailssAnimalDetailScreenBannerHeading}>
                 {animal.name}
@@ -417,7 +420,8 @@ export function WiildMoodtrailssAnimalDetailScreen({
 
         <View style={styles.wiildMoodtrailssAnimalDetailScreenMainContent}>
           <View style={styles.wiildMoodtrailssAnimalDetailScreenDistanceNotice}>
-            <Text style={styles.wiildMoodtrailssAnimalDetailScreenDistanceGlyph}>
+            <Text
+              style={styles.wiildMoodtrailssAnimalDetailScreenDistanceGlyph}>
               🛡
             </Text>
             <Text style={styles.wiildMoodtrailssAnimalDetailScreenDistanceCopy}>

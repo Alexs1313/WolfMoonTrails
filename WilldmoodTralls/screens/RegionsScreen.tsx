@@ -21,7 +21,10 @@ import MapView, {
 import {useAppDispatch, useAppSelector} from '../app/hooks';
 import type {RootState} from '../app/store';
 import {uiActions} from '../app/slices/uiSlice';
-import {loadSavedPlaceIds, toggleSavedPlace} from '../app/slices/savedPlacesSlice';
+import {
+  loadSavedPlaceIds,
+  toggleSavedPlace,
+} from '../app/slices/savedPlacesSlice';
 import {
   FeaturedPlace,
   getPlaceById,
@@ -369,10 +372,12 @@ function WiildMoodtrailssWildMapView({
             anchor={{x: 0.5, y: 1}}
             onPress={() => onSelect(place.id)}
             tracksViewChanges={shouldTrackMarkerChanges(place.id)}>
-            <WiildMoodtrailssMapPinMarker
-              isFocused={place.id === selectedId}
-              onPress={() => onSelect(place.id)}
-            />
+            {Platform.OS === 'ios' ? (
+              <WiildMoodtrailssMapPinMarker
+                isFocused={place.id === selectedId}
+                onPress={() => onSelect(place.id)}
+              />
+            ) : null}
           </Marker>
         ))}
       </MapView>
@@ -523,9 +528,7 @@ export function WiildMoodtrailssRegionsScreen({
     (next: WiildMoodtrailssPlaceCategoryFilter) => {
       dispatch(uiActions.setRegionsCategory(next as any));
       const nextPlaces =
-        next === 'all'
-          ? Places
-          : Places.filter(p => p.category === next);
+        next === 'all' ? Places : Places.filter(p => p.category === next);
       if (!nextPlaces.some(p => p.id === selectedId)) {
         dispatch(
           uiActions.setRegionsSelectedId(nextPlaces[0]?.id ?? FeaturedPlace.id),

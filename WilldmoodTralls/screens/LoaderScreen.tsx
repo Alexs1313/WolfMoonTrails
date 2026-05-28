@@ -1,5 +1,12 @@
 import React, {useEffect} from 'react';
-import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  ImageBackground,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import type {StackScreenProps} from '@react-navigation/stack';
 import WebView from 'react-native-webview';
 
@@ -83,15 +90,10 @@ const PROGRESS_HEIGHT = 90;
 
 function LoaderSunProgress() {
   return (
-    <View
-      style={
-        styles.wiildMoodtrailssLoaderSunProgressProgressFrame
-      }>
+    <View style={styles.wiildMoodtrailssLoaderSunProgressProgressFrame}>
       <WebView
         source={{html: LOADER_HTML}}
-        style={
-          styles.wiildMoodtrailssLoaderSunProgressProgressSurface
-        }
+        style={styles.wiildMoodtrailssLoaderSunProgressProgressSurface}
         scrollEnabled={false}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
@@ -144,7 +146,11 @@ export function WiildMoodtrailssLoaderScreen({
       <View style={styles.wiildMoodtrailssLoaderScreenContentColumn}>
         <View style={styles.wiildMoodtrailssLoaderScreenBrandBlock}>
           <Image
-            source={appIcon}
+            source={
+              Platform.OS === 'ios'
+                ? appIcon
+                : require('../../assets/images/andr_iconloader.png')
+            }
             style={styles.wiildMoodtrailssLoaderScreenBrandIcon}
             resizeMode="cover"
           />

@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useMemo} from 'react';
 import {
   Image,
   ImageBackground,
+  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -16,7 +17,10 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useAppDispatch, useAppSelector} from '../app/hooks';
 import type {RootState} from '../app/store';
 import {uiActions} from '../app/slices/uiSlice';
-import {loadSavedPlaceIds, toggleSavedPlace} from '../app/slices/savedPlacesSlice';
+import {
+  loadSavedPlaceIds,
+  toggleSavedPlace,
+} from '../app/slices/savedPlacesSlice';
 import {
   FeaturedPlace,
   formatCoordinates,
@@ -104,7 +108,7 @@ const WiildMoodtrailssSpacing = {
 
 const PAGE_BOTTOM_PADDING = 80;
 const LIST_TOP_PADDING = 30;
-const DETAIL_NAV_TOP_PADDING = 24;
+const DETAIL_NAV_TOP_PADDING = 54;
 
 function WiildMoodtrailssPlacesSeparator() {
   return <View style={styles.wiildMoodtrailssPlacesScreenSeparator} />;
@@ -216,7 +220,11 @@ function WiildMoodtrailssPlacesHeader() {
       </View>
       <View style={styles.wiildMoodtrailssPlacesHeaderProfileFrame}>
         <Image
-          source={require('../../assets/images/wiild-moodtrailss-apicon.png')}
+          source={
+            Platform.OS === 'ios'
+              ? require('../../assets/images/wiild-moodtrailss-apicon.png')
+              : require('../../assets/images/andr_iconloader.png')
+          }
           style={styles.wiildMoodtrailssPlacesHeaderProfileImage}
           resizeMode="cover"
         />
@@ -302,7 +310,8 @@ function WiildMoodtrailssFeaturedPlaceCard({
         />
         <View style={styles.wiildMoodtrailssFeaturedPlaceCardTopRow}>
           <View style={styles.wiildMoodtrailssFeaturedPlaceCardHighlightChip}>
-            <Text style={styles.wiildMoodtrailssFeaturedPlaceCardHighlightLabel}>
+            <Text
+              style={styles.wiildMoodtrailssFeaturedPlaceCardHighlightLabel}>
               ⭐ FEATURED
             </Text>
           </View>
@@ -419,7 +428,9 @@ function WiildMoodtrailssPlaceListCard({
             style={styles.wiildMoodtrailssPlaceListCardShareControl}
             onPress={onShare}
             hitSlop={6}>
-            <Text style={styles.wiildMoodtrailssPlaceListCardShareGlyph}>↗</Text>
+            <Text style={styles.wiildMoodtrailssPlaceListCardShareGlyph}>
+              ↗
+            </Text>
           </Pressable>
           <Pressable
             style={styles.wiildMoodtrailssPlaceListCardDetailsControl}
@@ -444,7 +455,9 @@ export function WiildMoodtrailssPlacesScreen({
 }: WiildMoodtrailssPlacesScreenProps) {
   const dispatch = useAppDispatch();
   const search = useAppSelector(state => state.ui.places.search);
-  const category = useAppSelector(state => state.ui.places.category) as WiildMoodtrailssPlaceCategoryFilter;
+  const category = useAppSelector(
+    state => state.ui.places.category,
+  ) as WiildMoodtrailssPlaceCategoryFilter;
   const savedIds = useAppSelector((state: RootState) => state.savedPlaces.ids);
 
   useFocusEffect(
@@ -483,9 +496,12 @@ export function WiildMoodtrailssPlacesScreen({
     [navigation],
   );
 
-  const handleToggleSave = useCallback(async (id: string) => {
-    await dispatch(toggleSavedPlace(id)).unwrap();
-  }, [dispatch]);
+  const handleToggleSave = useCallback(
+    async (id: string) => {
+      await dispatch(toggleSavedPlace(id)).unwrap();
+    },
+    [dispatch],
+  );
 
   const handleShare = useCallback((place: WiildMoodtrailssPlace) => {
     WiildMoodtrailssSharePlace(place);
@@ -530,7 +546,9 @@ export function WiildMoodtrailssPlacesScreen({
             </Text>
             <WiildMoodtrailssCategoryFilter
               activeCategory={category}
-              onChange={next => dispatch(uiActions.setPlacesCategory(next as any))}
+              onChange={next =>
+                dispatch(uiActions.setPlacesCategory(next as any))
+              }
             />
             <Text style={styles.wiildMoodtrailssPlacesScreenSectionTitle}>
               DESTINATIONS
@@ -651,9 +669,10 @@ export function WiildMoodtrailssPlaceDetailScreen({
                   styles.wiildMoodtrailssPlaceDetailScreenNavigationControl
                 }>
                 <Text
-                  style={
-                    styles.wiildMoodtrailssPlaceDetailScreenNavigationGlyph
-                  }>
+                  style={[
+                    styles.wiildMoodtrailssPlaceDetailScreenNavigationGlyph,
+                    Platform.OS === 'android' && {bottom: 4},
+                  ]}>
                   ←
                 </Text>
               </Pressable>
