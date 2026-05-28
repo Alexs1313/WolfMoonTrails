@@ -32,6 +32,7 @@ import {
 import {WiildMoodtrailssOpenPlaceOnWildMap} from '../utils/OpenWildMap';
 import {WiildMoodtrailssSharePlace} from '../utils/SharePlace';
 import {WiildMoodtrailssIsPlaceSaved} from '../utils/SavedPlacesStorage';
+import {GradientBackground} from '../components';
 
 type WiildMoodtrailssOverviewStackParamList = {
   OverviewMain: undefined;
@@ -521,7 +522,7 @@ export function WiildMoodtrailssPlacesScreen({
   );
 
   return (
-    <View style={styles.wiildMoodtrailssPlacesScreenScreenLayout}>
+    <GradientBackground>
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
@@ -573,7 +574,7 @@ export function WiildMoodtrailssPlacesScreen({
           )}
         </View>
       </ScrollView>
-    </View>
+    </GradientBackground>
   );
 }
 
@@ -642,7 +643,7 @@ export function WiildMoodtrailssPlaceDetailScreen({
   const coords = formatCoordinates(place.latitude, place.longitude);
 
   return (
-    <View style={styles.wiildMoodtrailssPlaceDetailScreenScreenLayout}>
+    <GradientBackground>
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
@@ -811,7 +812,7 @@ export function WiildMoodtrailssPlaceDetailScreen({
           </Text>
         </View>
       </ScrollView>
-    </View>
+    </GradientBackground>
   );
 }
 
@@ -1135,7 +1136,6 @@ const styles = StyleSheet.create({
   },
   wiildMoodtrailssPlacesScreenScreenLayout: {
     flex: 1,
-    backgroundColor: '#070C1A',
   },
   wiildMoodtrailssPlacesScreenList: {
     paddingHorizontal: WiildMoodtrailssSpacing.md,

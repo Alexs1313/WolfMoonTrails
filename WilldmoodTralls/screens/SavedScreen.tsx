@@ -12,12 +12,8 @@ import {useFocusEffect} from '@react-navigation/native';
 import type {StackScreenProps} from '@react-navigation/stack';
 import LinearGradient from 'react-native-linear-gradient';
 
-import {ScreenContainer} from '../components';
-import {
-  getPlaceById,
-  PlaceImages,
-  type WiildMoodtrailssPlace,
-} from '../data';
+import {GradientBackground, ScreenContainer} from '../components';
+import {getPlaceById, PlaceImages, type WiildMoodtrailssPlace} from '../data';
 import {WiildMoodtrailssOpenPlaceOnWildMap} from '../utils/OpenWildMap';
 import {
   WiildMoodtrailssGetSavedPlaceIds,
@@ -52,12 +48,13 @@ const WiildMoodtrailssPlaceCategories: WiildMoodtrailssPlaceCategory[] = [
   {id: 'sky-hunters', label: 'Sky Watchers', color: '#3B82F6'},
 ];
 
-const WiildMoodtrailssPlaceCategoryById = WiildMoodtrailssPlaceCategories.reduce<
-  Record<WiildMoodtrailssPlaceCategoryId, WiildMoodtrailssPlaceCategory>
->((acc, category) => {
-  acc[category.id] = category;
-  return acc;
-}, {} as Record<WiildMoodtrailssPlaceCategoryId, WiildMoodtrailssPlaceCategory>);
+const WiildMoodtrailssPlaceCategoryById =
+  WiildMoodtrailssPlaceCategories.reduce<
+    Record<WiildMoodtrailssPlaceCategoryId, WiildMoodtrailssPlaceCategory>
+  >((acc, category) => {
+    acc[category.id] = category;
+    return acc;
+  }, {} as Record<WiildMoodtrailssPlaceCategoryId, WiildMoodtrailssPlaceCategory>);
 
 function WiildMoodtrailssGetCategoryById(id: WiildMoodtrailssPlaceCategoryId) {
   return WiildMoodtrailssPlaceCategoryById[id];
@@ -206,7 +203,8 @@ function WiildMoodtrailssSavedSpotCard({
             start={{x: 0.15, y: 0}}
             end={{x: 0.85, y: 1}}
             style={styles.wiildMoodtrailssSavedSpotCardPrimaryAction}>
-            <Text style={styles.wiildMoodtrailssSavedSpotCardPrimaryActionLabel}>
+            <Text
+              style={styles.wiildMoodtrailssSavedSpotCardPrimaryActionLabel}>
               Open Details
             </Text>
           </LinearGradient>
@@ -219,7 +217,9 @@ function WiildMoodtrailssSavedSpotCard({
         <Pressable
           style={styles.wiildMoodtrailssSavedSpotCardDismissControl}
           onPress={onDismiss}>
-          <Text style={styles.wiildMoodtrailssSavedSpotCardDismissGlyph}>✕</Text>
+          <Text style={styles.wiildMoodtrailssSavedSpotCardDismissGlyph}>
+            ✕
+          </Text>
         </Pressable>
       </View>
     </View>
@@ -260,8 +260,7 @@ export function WiildMoodtrailssShelfScreen({
   );
 
   const openPlace = useCallback(
-    (id: string) =>
-      navigation.navigate(ROUTE_SHELF_DETAIL, {id}),
+    (id: string) => navigation.navigate(ROUTE_SHELF_DETAIL, {id}),
     [navigation],
   );
 
@@ -295,7 +294,7 @@ export function WiildMoodtrailssShelfScreen({
   const isEmpty = savedPlaces.length === 0;
 
   return (
-    <View style={styles.wiildMoodtrailssShelfScreenScreenLayout}>
+    <GradientBackground>
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
@@ -327,7 +326,7 @@ export function WiildMoodtrailssShelfScreen({
           </View>
         )}
       </ScrollView>
-    </View>
+    </GradientBackground>
   );
 }
 

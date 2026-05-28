@@ -25,6 +25,7 @@ import {
   loadSavedPlaceIds,
   toggleSavedPlace,
 } from '../app/slices/savedPlacesSlice';
+import {GradientBackground} from '../components';
 import {
   FeaturedPlace,
   getPlaceById,
@@ -555,7 +556,7 @@ export function WiildMoodtrailssRegionsScreen({
   }, [navigation, selectedPlace]);
 
   return (
-    <View style={styles.wiildMoodtrailssRegionsScreenScreenLayout}>
+    <GradientBackground>
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
@@ -588,7 +589,7 @@ export function WiildMoodtrailssRegionsScreen({
           />
         </View>
       </ScrollView>
-    </View>
+    </GradientBackground>
   );
 }
 

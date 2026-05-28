@@ -37,7 +37,7 @@ export {WiildMoodtrailssScreenContainer as ScreenContainer};
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
-    backgroundColor: '#070C1A',
+    backgroundColor: 'transparent',
   },
   content: {
     flex: 1,

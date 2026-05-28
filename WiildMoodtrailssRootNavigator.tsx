@@ -5,6 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {WiildMoodtrailssIntroScreen} from './WilldmoodTralls/screens/IntroScreen';
 import {WiildMoodtrailssLoaderScreen} from './WilldmoodTralls/screens/LoaderScreen';
 import {WiildMoodtrailssTabNavigator} from './WilldmoodTralls/routes/Tabnav';
+import {GradientBackground} from './WilldmoodTralls/components/GradientBackground';
 
 type RootStackParamList = {
   Loader: undefined;
@@ -21,6 +22,14 @@ const routes = {
 } as const;
 
 const RootStack = createStackNavigator<RootStackParamList>();
+
+function MainWithGradient() {
+  return (
+    <GradientBackground>
+      <WiildMoodtrailssTabNavigator />
+    </GradientBackground>
+  );
+}
 
 export function WiildMoodtrailssRootNavigator() {
   return (
@@ -43,8 +52,11 @@ export function WiildMoodtrailssRootNavigator() {
         />
         <RootStack.Screen
           name={routes.root.main}
-          component={WiildMoodtrailssTabNavigator}
-          options={{gestureEnabled: false}}
+          component={MainWithGradient}
+          options={{
+            gestureEnabled: false,
+            cardStyle: {backgroundColor: 'transparent'},
+          }}
         />
       </RootStack.Navigator>
     </NavigationContainer>

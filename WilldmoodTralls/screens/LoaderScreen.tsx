@@ -22,66 +22,91 @@ type WiildMoodtrailssRootStackParamList = {
 const LOADER_DURATION_MS = 5000;
 
 const LOADER_HTML = `<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    * {
+    html, body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-    html,
-    body {
       width: 100%;
       height: 100%;
       background: transparent;
       overflow: hidden;
+    }
+
+    .loader-wrapper {
+      width: 100vw;
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .loader {
-      width: 80px;
-      height: 40px;
-      border-radius: 100px 100px 0 0;
-      position: relative;
-      overflow: hidden;
+
+    .dots-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
     }
-    .loader:before {
-      content: "";
-      position: absolute;
-      inset: 0 0 -100%;
-      background:
-        radial-gradient(farthest-side, #ffd738 80%, #0000) left 70% top 20% / 15px 15px,
-        radial-gradient(farthest-side, #020308 92%, #0000) left 65% bottom 19% / 12px 12px,
-        radial-gradient(farthest-side, #ecfefe 92%, #0000) left 70% bottom 20% / 15px 15px,
-        linear-gradient(#9eddfe 50%, #020308 0);
-      background-repeat: no-repeat;
-      animation: l5 2s infinite;
+
+    .dot {
+      height: 20px;
+      width: 20px;
+      margin-right: 10px;
+      border-radius: 10px;
+      background-color: #b3d4fc;
+      animation: pulse 1.5s infinite ease-in-out;
     }
-    @keyframes l5 {
-      0%,
-      20% {
-        transform: rotate(0);
+
+    .dot:last-child {
+      margin-right: 0;
+    }
+
+    .dot:nth-child(1) {
+      animation-delay: -0.3s;
+    }
+
+    .dot:nth-child(2) {
+      animation-delay: -0.1s;
+    }
+
+    .dot:nth-child(3) {
+      animation-delay: 0.1s;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.8);
+        background-color: #b3d4fc;
+        box-shadow: 0 0 0 0 rgba(178, 212, 252, 0.7);
       }
-      40%,
-      60% {
-        transform: rotate(0.5turn);
+
+      50% {
+        transform: scale(1.2);
+        background-color: #6793fb;
+        box-shadow: 0 0 0 10px rgba(178, 212, 252, 0);
       }
-      80%,
+
       100% {
-        transform: rotate(1turn);
+        transform: scale(0.8);
+        background-color: #b3d4fc;
+        box-shadow: 0 0 0 0 rgba(178, 212, 252, 0.7);
       }
     }
   </style>
 </head>
 <body>
-  <div class="loader"></div>
+  <div class="loader-wrapper">
+    <section class="dots-container">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </section>
+  </div>
 </body>
 </html>`;
 
@@ -168,14 +193,9 @@ export function WiildMoodtrailssLoaderScreen({
 }
 
 const styles = StyleSheet.create({
-  wiildMoodtrailssLoaderSunProgressProgressFrame: {
-    width: PROGRESS_WIDTH,
-    height: PROGRESS_HEIGHT,
-    overflow: 'hidden',
-  },
   wiildMoodtrailssLoaderSunProgressProgressSurface: {
-    width: PROGRESS_WIDTH,
-    height: PROGRESS_HEIGHT,
+    width: 180,
+    height: 80,
     backgroundColor: 'transparent',
   },
   wiildMoodtrailssLoaderScreenScreenLayout: {

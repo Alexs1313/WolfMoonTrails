@@ -3,6 +3,7 @@ import {
   Image,
   Pressable,
   ScrollView,
+  ScrollViewBase,
   StyleSheet,
   Text,
   View,
@@ -24,6 +25,7 @@ import {
   WiildMoodtrailssGetQuizProgress,
   WiildMoodtrailssSaveLevelResult,
 } from '../utils/QuizProgressStorage';
+import {GradientBackground} from '../components';
 
 type SessionsStackParamList = {
   SessionsMain: undefined;
@@ -57,10 +59,7 @@ type QuizStarsProps = {
   max?: number;
 };
 
-function QuizStars({
-  count,
-  max = 3,
-}: QuizStarsProps) {
+function QuizStars({count, max = 3}: QuizStarsProps) {
   return (
     <View style={styles.wiildMoodtrailssQuizStarsRatingRow}>
       {Array.from({length: max}).map((_, index) => (
@@ -89,10 +88,7 @@ export function WiildMoodtrailssSessionsScreen({
 }: WiildMoodtrailssSessionsScreenProps) {
   const handleStart = useCallback(async () => {
     const progress = await WiildMoodtrailssGetQuizProgress();
-    const levelId = WiildMoodtrailssGetCurrentLevelId(
-      progress,
-      QuizLevels,
-    );
+    const levelId = WiildMoodtrailssGetCurrentLevelId(progress, QuizLevels);
     if (!levelId) {
       return;
     }
@@ -100,53 +96,60 @@ export function WiildMoodtrailssSessionsScreen({
   }, [navigation]);
 
   return (
-    <View
-      style={[
-        styles.wiildMoodtrailssSessionsScreenScreenLayout,
-        {
-          paddingTop: SESSIONS_TOP_PADDING,
-          paddingBottom: PAGE_BOTTOM_PADDING,
-        },
-      ]}>
-      <View style={styles.wiildMoodtrailssSessionsScreenHeaderBlock}>
-        <View style={styles.wiildMoodtrailssSessionsScreenHeadingRow}>
-          <Text style={styles.wiildMoodtrailssSessionsScreenAccentGlyph}>
-            ⚡
-          </Text>
-          <Text style={styles.wiildMoodtrailssSessionsScreenHeading}>
-            Wildlife Quiz
-          </Text>
+    <GradientBackground>
+      <ScrollView
+        contentContainerStyle={{flexGrow: 1}}
+        showsVerticalScrollIndicator={false}>
+        <View
+          style={[
+            styles.wiildMoodtrailssSessionsScreenScreenLayout,
+            {
+              paddingTop: SESSIONS_TOP_PADDING,
+              paddingBottom: PAGE_BOTTOM_PADDING,
+            },
+          ]}>
+          <View style={styles.wiildMoodtrailssSessionsScreenHeaderBlock}>
+            <View style={styles.wiildMoodtrailssSessionsScreenHeadingRow}>
+              <Text style={styles.wiildMoodtrailssSessionsScreenAccentGlyph}>
+                ⚡
+              </Text>
+              <Text style={styles.wiildMoodtrailssSessionsScreenHeading}>
+                Wildlife Quiz
+              </Text>
+            </View>
+            <Text style={styles.wiildMoodtrailssSessionsScreenDescription}>
+              Test your wilderness knowledge across multiple levels
+            </Text>
+          </View>
+
+          <View style={styles.wiildMoodtrailssSessionsScreenIllustrationFrame}>
+            <Image
+              source={require('../../assets/images/wiild-moodtrailss-wildlife-quiz-hero.png')}
+              style={styles.wiildMoodtrailssSessionsScreenIllustration}
+              resizeMode="contain"
+            />
+          </View>
+
+          <View style={styles.wiildMoodtrailssSessionsScreenIntroPanel}>
+            <Text style={styles.wiildMoodtrailssSessionsScreenIntroHeading}>
+              Before You Enter the Wild
+            </Text>
+            <Text style={styles.wiildMoodtrailssSessionsScreenIntroCopy}>
+              Learn how to stay calm, keep distance, and make smart decisions
+              around wolves, bears, and other wildlife.
+            </Text>
+            <Pressable
+              style={styles.wiildMoodtrailssSessionsScreenStartButton}
+              onPress={handleStart}>
+              <Text
+                style={styles.wiildMoodtrailssSessionsScreenStartButtonText}>
+                Start Safety Quiz
+              </Text>
+            </Pressable>
+          </View>
         </View>
-        <Text style={styles.wiildMoodtrailssSessionsScreenDescription}>
-          Test your wilderness knowledge across multiple levels
-        </Text>
-      </View>
-
-      <View style={styles.wiildMoodtrailssSessionsScreenIllustrationFrame}>
-        <Image
-          source={require('../../assets/images/wiild-moodtrailss-wildlife-quiz-hero.png')}
-          style={styles.wiildMoodtrailssSessionsScreenIllustration}
-          resizeMode="contain"
-        />
-      </View>
-
-      <View style={styles.wiildMoodtrailssSessionsScreenIntroPanel}>
-        <Text style={styles.wiildMoodtrailssSessionsScreenIntroHeading}>
-          Before You Enter the Wild
-        </Text>
-        <Text style={styles.wiildMoodtrailssSessionsScreenIntroCopy}>
-          Learn how to stay calm, keep distance, and make smart decisions around
-          wolves, bears, and other wildlife.
-        </Text>
-        <Pressable
-          style={styles.wiildMoodtrailssSessionsScreenStartButton}
-          onPress={handleStart}>
-          <Text style={styles.wiildMoodtrailssSessionsScreenStartButtonText}>
-            Start Safety Quiz
-          </Text>
-        </Pressable>
-      </View>
-    </View>
+      </ScrollView>
+    </GradientBackground>
   );
 }
 
@@ -167,8 +170,7 @@ export function WiildMoodtrailssQuizPlayScreen({
   const correctCount = useAppSelector(state => state.ui.quiz.correctCount);
   const selectedId = useAppSelector(state => state.ui.quiz.selectedOptionId);
 
-  const question: QuizQuestion | undefined =
-    level?.questions[questionIndex];
+  const question: QuizQuestion | undefined = level?.questions[questionIndex];
   const total = level?.questions.length ?? 0;
   const answered = selectedId !== null;
 
@@ -423,56 +425,61 @@ export function WiildMoodtrailssQuizResultScreen({
   }
 
   return (
-    <View
-      style={[
-        styles.wiildMoodtrailssQuizResultScreenScreenLayout,
-        {
-          paddingTop: QUIZ_TOP_PADDING,
-          paddingBottom: PAGE_BOTTOM_PADDING,
-        },
-      ]}>
-      <View style={styles.wiildMoodtrailssQuizResultScreenContentColumn}>
-        <View style={styles.wiildMoodtrailssQuizResultScreenBadgeFrame}>
-          <Text style={styles.wiildMoodtrailssQuizResultScreenBadgeGlyph}>
-            🏆
-          </Text>
-        </View>
-        <Text style={styles.wiildMoodtrailssQuizResultScreenHeading}>
-          Level Complete!
-        </Text>
-        <Text style={styles.wiildMoodtrailssQuizResultScreenLevelLabel}>
-          {level.title}
-        </Text>
-        <QuizStars count={stars} />
-        <View style={styles.wiildMoodtrailssQuizResultScreenResultPanel}>
-          <Text style={styles.wiildMoodtrailssQuizResultScreenResultValue}>
-            {correctCount}/{total}
-          </Text>
-          <Text style={styles.wiildMoodtrailssQuizResultScreenResultCaption}>
-            Questions answered correctly
-          </Text>
-        </View>
-        <View style={styles.wiildMoodtrailssQuizResultScreenActionRow}>
-          <Pressable
-            style={styles.wiildMoodtrailssQuizResultScreenRetryControl}
-            onPress={handleRetry}>
-            <Text style={styles.wiildMoodtrailssQuizResultScreenRetryGlyph}>
-              ↻
+    <ScrollView
+      contentContainerStyle={{flexGrow: 1}}
+      showsVerticalScrollIndicator={false}>
+      <View
+        style={[
+          styles.wiildMoodtrailssQuizResultScreenScreenLayout,
+          {
+            paddingTop: QUIZ_TOP_PADDING,
+            paddingBottom: PAGE_BOTTOM_PADDING,
+          },
+        ]}>
+        <View style={styles.wiildMoodtrailssQuizResultScreenContentColumn}>
+          <View style={styles.wiildMoodtrailssQuizResultScreenBadgeFrame}>
+            <Text style={styles.wiildMoodtrailssQuizResultScreenBadgeGlyph}>
+              🏆
             </Text>
-            <Text style={styles.wiildMoodtrailssQuizResultScreenRetryLabel}>
-              Retry
+          </View>
+          <Text style={styles.wiildMoodtrailssQuizResultScreenHeading}>
+            Level Complete!
+          </Text>
+          <Text style={styles.wiildMoodtrailssQuizResultScreenLevelLabel}>
+            {level.title}
+          </Text>
+          <QuizStars count={stars} />
+          <View style={styles.wiildMoodtrailssQuizResultScreenResultPanel}>
+            <Text style={styles.wiildMoodtrailssQuizResultScreenResultValue}>
+              {correctCount}/{total}
             </Text>
-          </Pressable>
-          <Pressable
-            style={styles.wiildMoodtrailssQuizResultScreenContinueControl}
-            onPress={nextLevelId ? handleNext : handleDone}>
-            <Text style={styles.wiildMoodtrailssQuizResultScreenContinueLabel}>
-              {nextLevelId ? 'Next Level →' : 'Done'}
+            <Text style={styles.wiildMoodtrailssQuizResultScreenResultCaption}>
+              Questions answered correctly
             </Text>
-          </Pressable>
+          </View>
+          <View style={styles.wiildMoodtrailssQuizResultScreenActionRow}>
+            <Pressable
+              style={styles.wiildMoodtrailssQuizResultScreenRetryControl}
+              onPress={handleRetry}>
+              <Text style={styles.wiildMoodtrailssQuizResultScreenRetryGlyph}>
+                ↻
+              </Text>
+              <Text style={styles.wiildMoodtrailssQuizResultScreenRetryLabel}>
+                Retry
+              </Text>
+            </Pressable>
+            <Pressable
+              style={styles.wiildMoodtrailssQuizResultScreenContinueControl}
+              onPress={nextLevelId ? handleNext : handleDone}>
+              <Text
+                style={styles.wiildMoodtrailssQuizResultScreenContinueLabel}>
+                {nextLevelId ? 'Next Level →' : 'Done'}
+              </Text>
+            </Pressable>
+          </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -493,7 +500,6 @@ const styles = StyleSheet.create({
   },
   wiildMoodtrailssSessionsScreenScreenLayout: {
     flex: 1,
-    backgroundColor: '#070C1A',
     paddingHorizontal: spacing.md,
   },
   wiildMoodtrailssSessionsScreenHeaderBlock: {

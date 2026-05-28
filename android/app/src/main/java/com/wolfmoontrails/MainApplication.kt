@@ -1,4 +1,4 @@
-package com.wolfmoontrails
+package com.wolf.moon.trails
 
 import android.app.Application
 import com.facebook.react.PackageList

@@ -1,4 +1,4 @@
-package com.wolfmoontrails
+package com.wolf.moon.trails
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

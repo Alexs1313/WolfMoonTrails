@@ -20,6 +20,7 @@ import {
   type WiildMoodtrailssGuideAnimal,
   type WiildMoodtrailssSafetyNote,
 } from '../data';
+import {GradientBackground} from '../components';
 
 const WiildMoodtrailssRoutes = {
   library: {
@@ -256,7 +257,7 @@ export function WiildMoodtrailssLibraryScreen({
   }, []);
 
   return (
-    <View style={styles.wiildMoodtrailssLibraryScreenScreenLayout}>
+    <GradientBackground>
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
@@ -297,7 +298,7 @@ export function WiildMoodtrailssLibraryScreen({
           </View>
         )}
       </ScrollView>
-    </View>
+    </GradientBackground>
   );
 }
 
@@ -373,7 +374,7 @@ export function WiildMoodtrailssAnimalDetailScreen({
   }
 
   return (
-    <View style={styles.wiildMoodtrailssAnimalDetailScreenScreenLayout}>
+    <GradientBackground>
       <ScrollView
         showsVerticalScrollIndicator={false}
         bounces={false}
@@ -471,7 +472,7 @@ export function WiildMoodtrailssAnimalDetailScreen({
           </View>
         </View>
       </ScrollView>
-    </View>
+    </GradientBackground>
   );
 }
 
