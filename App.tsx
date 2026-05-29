@@ -1,6 +1,6 @@
 import React from 'react';
 import {WiildMoodtrailssRootNavigator} from './WiildMoodtrailssRootNavigator';
-import {AppProvider} from './WilldmoodTralls/app/AppProvider';
+import {AppProvider} from './Wlddmoodtrillllls/Wlddmoodtrilllllsapp/AppProvider';
 
 function WiildMoodtrailssApp(): React.JSX.Element {
   return (

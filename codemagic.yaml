@@ -4,17 +4,17 @@ workflows:
     max_build_duration: 120
     instance_type: mac_mini_m2
     integrations:
-      app_store_connect: WildMoodAPIKey
+      app_store_connect: TobiasMarstonAPIKey
     environment:
       xcode: '26.0'
       ios_signing:
         distribution_type: app_store
-        bundle_identifier: com.adasewr.sioasm
+        bundle_identifier: com.sdlkfdsklskdfmd.dkld
       vars:
-        BUNDLE_ID: com.adasewr.sioasm
+        BUNDLE_ID: com.sdlkfdsklskdfmd.dkld
         XCODE_WORKSPACE: WolfMoonTrails.xcworkspace
         XCODE_SCHEME: WolfMoonTrails
-        APP_STORE_APPLE_ID: 6774062573
+        APP_STORE_APPLE_ID: 6774607983
     scripts:
       - name: Install npm dependencies
         script: |

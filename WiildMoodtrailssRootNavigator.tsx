@@ -2,9 +2,9 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import {WiildMoodtrailssIntroScreen} from './WilldmoodTralls/screens/IntroScreen';
-import {WiildMoodtrailssLoaderScreen} from './WilldmoodTralls/screens/LoaderScreen';
-import {WiildMoodtrailssTabNavigator} from './WilldmoodTralls/routes/Tabnav';
+import {WiildMoodtrailssIntroScreen} from './Wlddmoodtrillllls/Wlddmoodtrilllllsscreens/IntroScreen';
+import {WiildMoodtrailssLoaderScreen} from './Wlddmoodtrillllls/Wlddmoodtrilllllsscreens/LoaderScreen';
+import {WiildMoodtrailssTabNavigator} from './Wlddmoodtrillllls/Wlddmoodtrilllllsroutes/Tabnav';
 
 type RootStackParamList = {
   Loader: undefined;
